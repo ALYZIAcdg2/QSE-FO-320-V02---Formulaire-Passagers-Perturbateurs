@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>QSE-FO-320 V02 - Passagers Perturbateurs</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+
+<div id="document-to-print" class="page">
+    <div class="header">
+        <div class="header-left">
+            <img src="logo_alyzia.png" class="logo" alt="Alyzia">
+        </div>
+        <div class="header-right">
+            <div class="title">FORMULAIRE</div>
+            <div class="subtitle">Passagers Perturbateurs</div>
+        </div>
+    </div>
+
+    <div class="space-header"></div>
+
+    <div class="section gray">Informations du passager :</div>
+    <div class="row">
+        <div class="col-left">
+            <span class="bold-text">NOM, Prénom :</span> 
+            <input type="text" id="nom_passager" class="input-line flex-grow">
+        </div>
+        <div class="col-right-shifted">
+            <span class="bold-text">SEXE :</span> 
+            <input type="radio" name="sexe" id="sm"> <label for="sm">M</label> 
+            <input type="radio" name="sexe" id="sf"> <label for="sf">F</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-left">
+            <span class="bold-text">DATE :</span> 
+            <input type="date" class="date-picker">
+        </div>
+        <div class="col-right-shifted">
+            <span class="bold-text">HEURE :</span> 
+            <input type="time" class="time-picker">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <span class="bold-text">N° vol / destination :</span> 
+            <input type="text" class="input-line w-80">
+        </div>
+    </div>
+
+    <div class="section gray">Lieu de l’incident :</div>
+    <div class="row">
+        <div class="col">
+            <div class="check"><input type="checkbox"> Comptoir Ventes</div>
+            <div class="check"><input type="checkbox"> Comptoir enregistrement</div>
+            <div class="check"><input type="checkbox"> Comptoir embarquement</div>
+        </div>
+        <div class="col">
+            <div class="check"><input type="checkbox"> Comptoir Service Bagages</div>
+            <div class="check"><input type="checkbox"> Autre lieu : <input type="text" class="input-line"></div>
+            <div class="check">→ Préciser le hall / terminal : <input type="text" class="input-line"></div>
+        </div>
+    </div>
+
+    <div class="section gray">Nature de l’incident :</div>
+    <div class="row">
+        <div class="col">
+            <div class="check"><input type="checkbox"> Agression verbale</div>
+            <div class="check"><input type="checkbox"> Agression physique</div>
+            <div class="check"><input type="checkbox"> Dégradation matérielle</div>
+        </div>
+        <div class="col">
+            <div class="check"><input type="checkbox"> Refus de se conformer aux règles</div>
+            <div class="check"><input type="checkbox"> Autres : <input type="text" class="input-line"></div>
+        </div>
+    </div>
+
+    <div class="section gray">Cause de l’incident :</div>
+    <div class="split">
+        <div class="split-left">
+            <div class="check"><input type="checkbox"> Installations / infrastructures</div>
+            <div class="check"><input type="checkbox"> Retard avion / annulation du vol</div>
+            <div class="check"><input type="checkbox"> Bagages (acceptation, tarifs…)</div>
+            <div class="check"><input type="checkbox"> Autres : <input type="text" class="input-line"></div>
+        </div>
+        <div class="split-right">
+            <div class="desc-title bold-text">→ Description de l’incident :</div>
+            <textarea class="description-area" placeholder="Saisissez ici les détails..."></textarea>
+        </div>
+    </div>
+
+    <div class="section gray">Mesures prises :</div>
+    <div class="row">
+        <div class="col">
+            <div class="check"><input type="checkbox"> Refus d’embarquement (autorités/Cie)</div>
+            <div class="check"><input type="checkbox"> Débarquement (autorités/Cie)</div>
+            <div class="check"><input type="checkbox"> Demande d’intervention autorités</div>
+        </div>
+        <div class="col">
+            <div class="check"><input type="checkbox"> Autres : <input type="text" class="input-line"></div>
+        </div>
+    </div>
+
+    <div class="plainte-box">
+        Référence dépôt de plainte ou main courante : <input type="text" class="input-line flex-grow">
+    </div>
+
+    <div class="signatures">
+        <div class="col signature-box">
+            <span class="bold-text">Nom, prénom de l’agent :</span>
+            <div class="box-editable" contenteditable="true"></div>
+        </div>
+        <div class="col signature-box">
+            <span class="bold-text">Nom, prénom du superviseur :</span>
+            <div class="box-editable" contenteditable="true"></div>
+        </div>
+    </div>
+
+    <div class="encadrement">
+        <div class="fiche-box">
+            <span class="bold-text">Fiche n° :</span><br>
+            <input type="text" id="num_fiche" class="input-line w-100">
+        </div>
+        <div class="encadrement-content">
+            <div class="title-blue">A remplir par l’encadrement / Service QSE / Sûreté :</div>
+            <div class="check"><input type="checkbox"> <span class="level-text">Level 1</span> – Comportement perturbateur – risque faible</div>
+            <div class="check"><input type="checkbox"> <span class="level-text">Level 2</span> – Comportement agressif – risque modéré</div>
+            <div class="check"><input type="checkbox"> <span class="level-text">Level 3</span> – Comportement de mise en danger – risque sévère</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-left">
+            Le présent document est la propriété du Groupe Alyzia. Il ne peut être reproduit sans autorisation du service QSE. Art L612-14 du CSI.
+        </div>
+        <div class="footer-right">
+            QSE-FO-320 V02<br>31/03/2026<br>Page 1 sur 1
+        </div>
+    </div>
+</div>
+
+<div class="no-print action-buttons">
+    <button onclick="genererPDF()" class="btn btn-pdf">💾 ENREGISTRER PDF</button>
+    <button onclick="envoyerEmail()" class="btn btn-email">📧 ENVOYER PAR MAIL</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
