@@ -11,30 +11,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // FONCTION POUR GÉNÉRER LE PDF
 function genererPDF() {
-    // On cible l'élément à imprimer
     const element = document.getElementById('document-to-print');
     
-    // On récupère le nom et le numéro de fiche pour le nom du fichier
+    // On récupère les infos pour le nom du fichier
     const nom = document.getElementById('nom_passager').value || "Sans_Nom";
     const fiche = document.getElementById('num_fiche').value || "000";
 
     const options = {
-        margin: 0,
-        filename: `Rapport_Incident_${nom}_Fiche_${fiche}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
+        margin: [0, 0, 0, 0], // Aucune marge pour éviter les sauts de page
+        filename: `Rapport_${nom}_Fiche_${fiche}.pdf`,
+        image: { type: 'jpeg', quality: 1 },
         html2canvas: { 
-            scale: 2, 
+            scale: 2, // Haute définition
             useCORS: true,
-            letterRendering: true 
+            logging: false,
+            letterRendering: true
         },
         jsPDF: { 
             unit: 'mm', 
             format: 'a4', 
-            orientation: 'portrait' 
+            orientation: 'portrait',
+            precision: 32
         }
     };
 
-    // Lancement de la génération
+    // Lancement de la capture
     html2pdf().set(options).from(element).save();
 }
 

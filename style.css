@@ -193,3 +193,38 @@ input[type="checkbox"], input[type="radio"] {
     body { background: white; }
     .page { margin: 0; border: none; }
 }
+
+
+/* --- AJUSTEMENTS POUR LE RENDU PDF --- */
+.page {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto; /* Centrage */
+    background: white;
+    padding: 10mm; /* Marge interne de sécurité */
+    box-sizing: border-box;
+    overflow: hidden; /* Empêche tout débordement sur une 2ème page */
+    position: relative;
+}
+
+/* On réduit légèrement les espacements pour s'assurer que tout remonte */
+.section {
+    margin-top: 10px;
+    font-size: 11.5pt;
+}
+
+.row {
+    margin-top: 5px;
+}
+
+/* Force les inputs à ne pas avoir de bordures bleues au focus lors de la capture */
+input:focus, textarea:focus {
+    outline: none;
+}
+
+/* Style spécifique pour l'impression/capture */
+@media print {
+    body { background: white; }
+    .page { border: none; box-shadow: none; }
+    .no-print { display: none !important; }
+}
