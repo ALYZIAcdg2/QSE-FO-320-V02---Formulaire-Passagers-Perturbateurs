@@ -9,34 +9,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// FONCTION POUR GÉNÉRER LE PDF
 function genererPDF() {
     const element = document.getElementById('document-to-print');
     
-    // On récupère les infos pour le nom du fichier
+    // Récupération des infos pour le nom du fichier
     const nom = document.getElementById('nom_passager').value || "Sans_Nom";
     const fiche = document.getElementById('num_fiche').value || "000";
 
-    const options = {
-        margin: [0, 0, 0, 0], // Aucune marge pour éviter les sauts de page
-        filename: `Rapport_${nom}_Fiche_${fiche}.pdf`,
-        image: { type: 'jpeg', quality: 1 },
-        html2canvas: { 
-            scale: 2, // Haute définition
-            useCORS: true,
-            logging: false,
-            letterRendering: true
-        },
+    const opt = {
+        margin: 0,
+        filename: `Rapport_Incident_${nom}_Fiche_${fiche}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+html2canvas: { 
+    scale: 2, 
+    useCORS: true, 
+    logging: false,
+    width: 794 // Largeur fixe A4 en pixels pour éviter le décalage
+},
         jsPDF: { 
             unit: 'mm', 
             format: 'a4', 
-            orientation: 'portrait',
-            precision: 32
+            orientation: 'portrait' 
         }
     };
 
-    // Lancement de la capture
-    html2pdf().set(options).from(element).save();
+    // Utilisation de la promesse pour s'assurer du rendu complet
+    html2pdf().set(opt).from(element).save();
 }
 
 // FONCTION POUR L'ENVOI PAR MAIL (Préparation)
