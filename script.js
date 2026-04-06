@@ -71,16 +71,14 @@ html2canvas: {
     useCORS: true,
     letterRendering: true,
 
-    // 🔥 CORRECTION DU DÉCALAGE
-    scrollX: -window.scrollX,
-    scrollY: -window.scrollY,
+    scrollX: 0,
+    scrollY: 0,
 
-    // 🔥 CAPTURE EXACTE DU BLOC
-    x: 0,
-    y: 0,
+    x: element.getBoundingClientRect().left,
+    y: element.getBoundingClientRect().top,
 
-    windowWidth: document.documentElement.scrollWidth,
-    windowHeight: document.documentElement.scrollHeight
+    width: element.offsetWidth,
+    height: element.offsetHeight
 },
 
 function envoyerEmail() {
@@ -95,15 +93,4 @@ function envoyerEmail() {
     const corps = encodeURIComponent(`Nouveau rapport d'incident généré pour : ${nom}`);
     window.location.href = `mailto:votre-email@alyzia.com?subject=${sujet}&body=${corps}`;
 }
-function envoyerEmail() {
-    const nomInput =
-        document.getElementById('nom_passager') ||
-        document.getElementById('nom-passager') ||
-        document.querySelector('input[name="nom_passager"]');
 
-    const nom = nomInput && nomInput.value ? nomInput.value.trim() : "INCONNU";
-
-    const sujet = encodeURIComponent(`PAXI Incident - ${nom}`);
-    const corps = encodeURIComponent(`Nouveau rapport d'incident généré pour : ${nom}`);
-    window.location.href = `mailto:votre-email@alyzia.com?subject=${sujet}&body=${corps}`;
-}
