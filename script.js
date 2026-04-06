@@ -49,28 +49,22 @@ function genererPDF() {
             // Cela empêche le document d'être coupé sur la gauche
             windowWidth: 794 
         },
-        jsPDF: {
-            unit: 'mm',
-            format: 'a4',
-            orientation: 'portrait'
-        }
+jsPDF: {
+    unit: 'mm',
+    format: [210, 297],
+    orientation: 'portrait'
+}
     };
 
     // Lancement de la génération
-    html2pdf()
-        .set(opt)
-        .from(element)
-        .save()
-        .then(() => {
-            // Réaffichage des boutons après la sauvegarde
-            if (btnArea) btnArea.style.display = 'block';
-        })
-        .catch(err => {
-            if (btnArea) btnArea.style.display = 'block';
-            console.error("Erreur PDF:", err);
-            alert("Erreur lors de la génération du PDF.");
-        });
-}
+html2canvas: {
+    scale: 2,
+    useCORS: true,
+    letterRendering: true,
+    scrollY: 0,
+    windowWidth: 794,   // largeur A4 exacte
+    windowHeight: 1123  // 🔥 hauteur A4 (clé du problème)
+},
 
 function envoyerEmail() {
     const nom = document.getElementById('nom_passager').value || "INCONNU";
