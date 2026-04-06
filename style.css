@@ -168,30 +168,41 @@ input[type="checkbox"], input[type="radio"] { transform: scale(1.1); margin-righ
 /* --- OPTIMISATION IMPRESSION A4 SANS MARGE --- */
 /* Ajoutez ou modifiez ces règles dans votre section @media print */
 @media print {
-    @page { margin: 0; } /* Supprime les marges du navigateur */
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
 
-    body {
+    html, body {
+        width: 210mm;
+        height: 297mm;
         margin: 0 !important;
         padding: 0 !important;
-        background: white !important;
-        height: 297mm !important;
-        overflow: hidden; /* Verrouille sur une seule page */
+        overflow: hidden;
+        background: white;
     }
 
     .container {
         width: 210mm !important;
         height: 297mm !important;
         max-height: 297mm !important;
-        margin: 0 !important;
-        /* Padding réduit pour remonter le footer sur la page 1 */
-        padding: 5mm 10mm 3mm 10mm !important; 
+        margin: 0 auto !important;
+        padding: 5mm 8mm 4mm 8mm !important;
         box-sizing: border-box !important;
         border: none !important;
     }
 
-    /* Gain d'espace vertical supplémentaire */
-    .form-block { margin-bottom: 2px !important; }
-    .sig-zone { height: 40px !important; } /* Réduit les zones de signature */
-    
-    * { -webkit-print-color-adjust: exact !important; }
+    /* IMPORTANT : évite les sauts */
+    .form-block,
+    .signature-table,
+    .encadrement,
+    .legal-notice-box {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
 }
