@@ -294,16 +294,19 @@ input[type="radio"] {
         padding: 0 !important;
     }
 
-    .container {
-        width: 210mm !important;
-        max-width: 210mm !important;
-        min-height: 297mm !important;
-        margin: 0 !important;
-        padding: 6mm 8mm 5mm 8mm !important;
-        box-sizing: border-box !important;
-        border: none !important;
-        overflow: hidden !important;
-    }
+.container {
+    width: 210mm;
+    height: 297mm;
+
+    margin: 0;            /* ❌ IMPORTANT : enlève le centrage */
+    position: relative;
+    left: 0;
+
+    background: white;
+    padding: 8mm;
+    box-sizing: border-box;
+    border: 1px solid #000;
+}
 
     .form-block,
     .signature-table,
