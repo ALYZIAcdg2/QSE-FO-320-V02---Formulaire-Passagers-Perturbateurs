@@ -13,7 +13,7 @@ html, body {
 }
 
 body {
-    padding: 20px;
+    padding: 0px;
 }
 
 .container {
@@ -321,4 +321,9 @@ input[type="radio"] {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
+}
+#document-to-print {
+    position: relative;
+    left: 0;
+    margin: 0 auto;
 }
