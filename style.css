@@ -169,14 +169,15 @@ input[type="checkbox"], input[type="radio"] { transform: scale(1.1); margin-righ
 /* Ajoutez ou modifiez ces règles dans votre section @media print */
 @media print {
     @page { 
-        margin: 0; /* Supprime les marges ajoutées par le navigateur */
+        margin: 0; /* Supprime les marges de l'imprimante */
     }
 
     body {
         margin: 0 !important;
         padding: 0 !important;
+        background: white !important;
         height: 297mm !important;
-        overflow: hidden; /* Empêche strictement la création d'une page 2 */
+        overflow: hidden; /* Verrouille sur une seule page */
     }
 
     .container {
@@ -184,9 +185,14 @@ input[type="checkbox"], input[type="radio"] { transform: scale(1.1); margin-righ
         height: 297mm !important;
         max-height: 297mm !important;
         margin: 0 !important;
-        padding: 6mm 10mm !important; /* Réduit légèrement le padding pour faire remonter le bas */
+        padding: 5mm 10mm 3mm 10mm !important; /* Marges réduites pour faire tenir le footer */
         box-sizing: border-box !important;
         border: none !important;
+    }
+
+    /* Réduction de la hauteur des zones de signature pour gagner de l'espace */
+    .sig-zone { 
+        height: 40px !important; 
     }
 }
 
