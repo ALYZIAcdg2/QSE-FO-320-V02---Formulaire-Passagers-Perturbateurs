@@ -5,14 +5,14 @@ function genererPDF() {
     if (btnArea) btnArea.style.display = 'none';
 
     const opt = {
-        margin: [0, 0, 0, 0], // Suppression totale des marges pour la librairie
+        margin: [0, 0, 0, 0], 
         filename: 'PAXI_INCIDENT.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
             scale: 2,
             useCORS: true,
             scrollY: 0,
-            windowWidth: 794 // Force la largeur A4 pour éviter le saut de page
+            windowWidth: 794 // Force la largeur A4 exacte (empêche le décalage vers le bas)
         },
         jsPDF: {
             unit: 'mm',
