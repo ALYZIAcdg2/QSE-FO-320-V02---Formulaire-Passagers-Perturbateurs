@@ -166,20 +166,28 @@ input[type="checkbox"], input[type="radio"] { transform: scale(1.1); margin-righ
 .envoyer { background: #0056b3; }
 
 /* --- OPTIMISATION IMPRESSION A4 SANS MARGE --- */
+/* Ajoutez ou modifiez ces règles dans votre section @media print */
 @media print {
-    @page { margin: 0; }
-    .no-print, .btn-area { display: none !important; }
-    body { background: white !important; margin: 0 !important; padding: 0 !important; width: 210mm !important; height: 297mm !important; }
-    .container { 
-        width: 210mm !important; 
-        height: 297mm !important; 
-        max-width: 210mm !important;
-        margin: 0 !important;
-        padding: 8mm !important; 
-        border: none !important; 
-        box-sizing: border-box !important;
+    @page { 
+        margin: 0; /* Supprime les marges ajoutées par le navigateur */
     }
-    * { -webkit-print-color-adjust: exact !important; }
+
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 297mm !important;
+        overflow: hidden; /* Empêche strictement la création d'une page 2 */
+    }
+
+    .container {
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        padding: 6mm 10mm !important; /* Réduit légèrement le padding pour faire remonter le bas */
+        box-sizing: border-box !important;
+        border: none !important;
+    }
 }
 
 @media screen and (max-width: 600px) {
