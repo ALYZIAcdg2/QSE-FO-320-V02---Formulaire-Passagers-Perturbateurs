@@ -40,7 +40,7 @@ function genererPDF() {
         filename: `PAXI_INCIDENT_${nom}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
-            scale: 2, // Augmenté à 2 pour une meilleure netteté
+            scale: 1, // Augmenté à 2 pour une meilleure netteté
             useCORS: true,
             letterRendering: true,
             scrollY: 0, // Force le rendu depuis le haut de la page
