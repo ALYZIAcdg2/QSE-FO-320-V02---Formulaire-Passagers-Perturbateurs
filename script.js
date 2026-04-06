@@ -4,7 +4,7 @@ function genererPDF() {
 
     if (btn) btn.style.display = 'none';
 
-    // Synchronisation forcée des inputs
+    // Synchronisation forcée
     const inputs = element.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         if (input.type === 'checkbox' || input.type === 'radio') {
@@ -16,14 +16,14 @@ function genererPDF() {
     });
 
     const opt = {
-        margin: [0, 0, 0, 0],
+        margin: 0,
         filename: 'PAXI_INCIDENT.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { 
             scale: 2, 
             useCORS: true, 
             scrollY: 0, 
-            windowWidth: 794 // Verrouille la largeur A4 pour empêcher le saut de page
+            windowWidth: 800 // Aligné sur la largeur CSS .container
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
