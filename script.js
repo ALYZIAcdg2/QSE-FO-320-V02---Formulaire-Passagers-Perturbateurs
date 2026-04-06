@@ -3,18 +3,16 @@ function genererPDF() {
     const btnArea = document.querySelector('.btn-area');
 
     if (!element) {
-        alert("Erreur : conteneur #document-to-print introuvable.");
+        alert("Erreur : conteneur introuvable.");
         return;
     }
 
     if (btnArea) btnArea.style.display = 'none';
 
-    // Fige les valeurs saisies pour la capture PDF
+    // Fix inputs
     const fields = element.querySelectorAll('input, textarea');
     fields.forEach((field) => {
-        const type = (field.type || '').toLowerCase();
-
-        if (type === 'checkbox' || type === 'radio') {
+        if (field.type === 'checkbox' || field.type === 'radio') {
             if (field.checked) {
                 field.setAttribute('checked', 'checked');
             } else {
@@ -25,57 +23,56 @@ function genererPDF() {
         }
     });
 
-    // Sauvegarde du contenu des zones éditables si présentes
-    const editableZones = element.querySelectorAll('[contenteditable="true"]');
-    editableZones.forEach((zone) => {
-        zone.setAttribute('data-value', zone.innerText || '');
-    });
-
-    const nomInput =
-        document.getElementById('nom_passager') ||
-        document.getElementById('nom-passager') ||
-        document.querySelector('input[name="nom_passager"]');
-
-    const nom = nomInput && nomInput.value ? nomInput.value.trim() : 'incident';
-
-    const rect = element.getBoundingClientRect();
-
     const opt = {
         margin: [0, 0, 0, 0],
-        filename: `PAXI_INCIDENT_${nom}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
+        filename: 'PAXI_INCIDENT.pdf',
+        image: { type: 'jpeg', quality: 1 },
+
         html2canvas: {
             scale: 2,
             useCORS: true,
-            letterRendering: true,
             scrollX: 0,
-            scrollY: 0,
-            x: rect.left,
-            y: rect.top,
-            width: element.offsetWidth,
-            height: element.offsetHeight
+            scrollY: 0
         },
+
         jsPDF: {
             unit: 'mm',
             format: 'a4',
             orientation: 'portrait'
         },
-        pagebreak: {
-            mode: ['avoid-all']
-        }
+
+        pagebreak: { mode: ['avoid-all'] }
     };
 
     html2pdf()
         .set(opt)
         .from(element)
-        .save()
-        .then(() => {
-            if (btnArea) btnArea.style.display = 'block';
+        .toPdf()
+        .get('pdf')
+        .then(function (pdf) {
+
+            const pageHeight = pdf.internal.pageSize.getHeight();
+            const pageWidth = pdf.internal.pageSize.getWidth();
+
+            const canvas = document.querySelector('canvas');
+            const imgHeight = canvas.height;
+            const imgWidth = canvas.width;
+
+            const ratio = pageWidth / imgWidth;
+            const finalHeight = imgHeight * ratio;
+
+            // 👉 Ajustement vertical automatique
+            if (finalHeight < pageHeight) {
+                const yOffset = (pageHeight - finalHeight) / 2;
+                pdf.addImage(canvas, 'JPEG', 0, yOffset, pageWidth, finalHeight);
+            } else {
+                pdf.addImage(canvas, 'JPEG', 0, 0, pageWidth, finalHeight);
+            }
+
         })
-        .catch((err) => {
+        .save()
+        .finally(() => {
             if (btnArea) btnArea.style.display = 'block';
-            console.error('Erreur PDF :', err);
-            alert("Erreur lors de la génération du PDF.");
         });
 }
 
