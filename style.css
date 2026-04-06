@@ -168,38 +168,81 @@ input[type="checkbox"], input[type="radio"] { transform: scale(1.1); margin-righ
 /* --- OPTIMISATION IMPRESSION A4 SANS MARGE --- */
 /* Ajoutez ou modifiez ces règles dans votre section @media print */
 @media print {
-    @page { 
-        margin: 0; /* Supprime les marges de l'imprimante */
+    .no-print,
+    .btn-area {
+        display: none !important;
     }
 
-    body {
-        margin: 0 !important;
-        padding: 0 !important;
+    html, body {
         background: white !important;
-        height: 297mm !important;
-        overflow: hidden; /* Verrouille sur une seule page */
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 210mm !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 
     .container {
-        width: 210mm !important;
-        height: 297mm !important;
-        max-height: 297mm !important;
-        margin: 0 !important;
-        padding: 5mm 10mm 3mm 10mm !important; /* Marges réduites pour faire tenir le footer */
-        box-sizing: border-box !important;
+        width: 190mm !important;
+        max-width: 190mm !important;
+        margin: 0 auto !important;
+        padding: 4mm !important;
         border: none !important;
+        box-sizing: border-box !important;
+        transform: none !important;
     }
 
-    /* Réduction de la hauteur des zones de signature pour gagner de l'espace */
-    .sig-zone { 
-        height: 40px !important; 
+    .main-header {
+        margin-bottom: 2mm !important;
     }
+
+    .form-block,
+    .result-container,
+    .info-block {
+        margin-bottom: 1.5mm !important;
+    }
+
+.q-title {
+    margin: 1.5mm 0 0.5mm 0 !important;
+    padding-bottom: 1mm !important;
+    line-height: 1 !important;
 }
 
-@media screen and (max-width: 600px) {
-    .grid-2 { grid-template-columns: 1fr; }
-    .main-header { flex-direction: column; height: auto; }
-    .logo-box, .title-box { width: 100%; border-right: none; }
-    .encadrement { flex-direction: column; }
-    .fiche-box { width: 100%; }
+.question-card {
+    margin-bottom: 0.5mm !important;
+    padding: 0 !important;
+}
+
+.question-card p {
+    margin: 0 0 0.5mm 0 !important;
+    padding-bottom: 0.5mm !important;
+    font-size: 9.5pt !important;
+}
+
+    .question-card label {
+        font-size: 9pt !important;
+        margin: 2px 0 !important;
+    }
+
+    .pictogram-img-right {
+        width: 50px !important;
+    }
+
+    .sig-zone {
+        height: 45px !important;
+    }
+
+    .legal-notice-box {
+        margin-top: 2mm !important;
+    }
+
+    .question-card,
+    .signature-table,
+    .legal-notice-box,
+    .form-block,
+    .result-container,
+    .info-block {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
 }
