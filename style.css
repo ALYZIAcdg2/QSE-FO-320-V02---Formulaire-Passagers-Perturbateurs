@@ -1,206 +1,58 @@
-:root { 
-    --orange: #EF7D00; 
-}
+:root { --orange: #EF7D00; }
 
-/* --- STYLES GÉNÉRAUX --- */
-body { 
-    font-family: Arial, sans-serif; 
-    background: #ccc; 
-    padding: 20px; 
-    margin: 0;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-}
+body { font-family: Arial, sans-serif; background: #ccc; padding: 10px; margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
-.container { 
-    max-width: 800px;
-    margin: auto; 
-    background: white; 
-    padding: 10mm; 
-    border: 1px solid #000; 
-    box-sizing: border-box;
-}
+.container { max-width: 800px; margin: auto; background: white; padding: 7mm; border: 1px solid #000; box-sizing: border-box; }
 
-/* --- EN-TÊTE --- */
-.main-header {
-    display: flex;
-    border: 1px solid #000;
-    margin-bottom: 5px;
-    height: 70px;
-}
+/* HEADER COMPACT PHOTO 7 */
+.main-header { display: flex; border: 1px solid #000; margin-bottom: 3px; height: 62px; }
+.logo-box { width: 30%; border-right: 1px solid #000; padding: 2px; display: flex; align-items: center; justify-content: center; }
+.logo-box img { max-height: 48px; width: auto; }
+.title-box { width: 70%; text-align: center; }
+.title-box h1 { margin: 0; font-size: 1.25rem; color: var(--orange); border-bottom: 1px solid #000; padding: 1px; }
+.title-box h2 { margin: 0; font-size: 0.95rem; padding: 1px; }
 
-.logo-box {
-    width: 30%;
-    border-right: 1px solid #000;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo-box img { max-height: 55px; width: auto; }
-
-.title-box {
-    width: 70%;
-    text-align: center;
-}
-
-.title-box h1 {
-    margin: 0;
-    font-size: 1.4rem;
-    color: var(--orange);
-    border-bottom: 1px solid #000;
-    padding: 4px;
-}
-
-.title-box h2 {
-    margin: 2px 0;
-    font-size: 1.1rem;
-}
-
-/* --- BLOCS D'INFORMATIONS --- */
-.form-block { margin-bottom: 5px; border: 1px solid #000; }
-.block-header { 
-    background: #E7E6E6 !important; 
-    color: black; 
-    padding: 4px 10px; 
-    font-weight: bold; 
-    font-size: 0.9rem; 
-    border-bottom: 1px solid #000;
-    text-decoration: underline;
-}
+/* BLOCS SERRÉS POUR 1 PAGE */
+.form-block { margin-bottom: 3px; border: 1px solid #000; }
+.block-header { background: #E7E6E6 !important; padding: 2px 10px; font-weight: bold; font-size: 0.82rem; border-bottom: 1px solid #000; text-decoration: underline; }
 
 .info-table, .split-table { width: 100%; border-collapse: collapse; }
-.info-table td { padding: 5px 8px; vertical-align: middle; font-size: 0.9rem; }
+.info-table td { padding: 2px 8px; vertical-align: middle; font-size: 0.82rem; }
 
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-.padding-10 { padding: 8px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; }
+.padding-5 { padding: 4px; }
+.padding-left-80 { padding-left: 80px; } /* Décalage colonne droite */
 
-.input-line { 
-    border: none; 
-    border-bottom: 1.5px solid black; 
-    font-weight: bold; 
-    outline: none; 
-    background: transparent; 
-    font-size: 0.9rem;
-}
+.input-line { border: none; border-bottom: 1px solid black; font-weight: bold; outline: none; background: transparent; font-size: 0.82rem; }
+.w-80 { width: 80%; } .w-100 { width: 100%; } .flex-grow { flex-grow: 1; margin-left: 10px; }
 
-.w-80 { width: 80%; }
-.w-100 { width: 100%; }
-.flex-grow { flex-grow: 1; margin-left: 10px; }
+.check-box { display: block; margin-bottom: 2px; cursor: pointer; font-size: 0.78rem; }
+input[type="checkbox"], input[type="radio"] { transform: scale(0.95); margin-right: 5px; }
 
-.check-box { display: block; margin-bottom: 3px; cursor: pointer; font-size: 0.85rem; }
-input[type="checkbox"], input[type="radio"] { transform: scale(1.1); margin-right: 8px; }
+.desc-area { width: 100%; height: 70px; border: 1px solid #000; resize: none; font-family: Arial; padding: 4px; box-sizing: border-box; font-size: 0.82rem; }
+.plainte-bar { padding: 3px 10px; margin-top: 2px; border: 1px solid #000; display: flex; align-items: center; background: #f2f2f2 !important; font-size: 0.82rem; }
 
-.desc-area { 
-    width: 100%; 
-    height: 80px; 
-    border: 1px solid #000; 
-    resize: none; 
-    font-family: Arial; 
-    padding: 5px; 
-    box-sizing: border-box; 
-    font-size: 0.9rem;
-}
+.signature-table { width: 100%; border-collapse: collapse; margin-top: 2px; border: 1px solid #000; }
+.sub-title-sig { background-color: #f2f2f2; border: 1px solid #000; padding: 1px; width: 50%; font-size: 0.78rem; font-style: italic; text-decoration: underline; text-align: center; }
+.sig-zone { border: 1px solid #000; height: 38px; vertical-align: top; } /* Réduit pour gagner l'espace final */
 
-.plainte-bar { 
-    padding: 6px 10px; 
-    margin-top: 5px; 
-    border: 1px solid #000; 
-    display: flex; 
-    align-items: center; 
-    background: #f2f2f2 !important; 
-    font-size: 0.9rem;
-}
-
-/* --- SIGNATURES --- */
-.signature-table { width: 100%; border-collapse: collapse; margin-top: 5px; border: 1px solid #000; }
-.sub-title-sig { 
-    background-color: #f2f2f2; 
-    border: 1px solid #000; 
-    padding: 4px; 
-    width: 50%; 
-    font-size: 0.85rem; 
-    font-style: italic;
-    text-decoration: underline;
-    text-align: center;
-}
-
-.sig-zone { border: 1px solid #000; height: 65px; vertical-align: top; }
-.sig-content { width: 100%; height: 100%; padding: 5px; font-weight: bold; }
-
-/* --- ENCADREMENT --- */
-.encadrement {
-    display: flex; 
-    gap: 15px;
-    margin-top: 8px;
-    align-items: stretch;
-}
-
-.fiche-box {
-    width: 130px; 
-    border: 1px solid black;
-    padding: 8px;
-    box-sizing: border-box;
-    font-size: 0.9rem;
-}
-
-.encadrement-content {
-    flex-grow: 1; 
-    border: 1px solid black;
-    padding: 8px;
-}
-
-.blue-title { color: #0000FF !important; font-weight: bold; font-size: 0.95rem; margin-bottom: 5px; }
+.encadrement { display: flex; gap: 8px; margin-top: 4px; align-items: stretch; }
+.fiche-box { width: 115px; border: 1px solid black; padding: 4px; font-size: 0.82rem; }
+.encadrement-content { flex-grow: 1; border: 1px solid black; padding: 4px; }
+.blue-title { color: #0000FF !important; font-weight: bold; font-size: 0.82rem; margin-bottom: 1px; }
 .level-text { color: #0000FF !important; font-weight: bold; }
 
-/* --- BAS DE PAGE --- */
-.legal-notice-box { display: flex; border: 1px solid #000; margin-top: 8px; font-size: 0.65rem; }
-.legal-text { width: 80%; padding: 4px; border-right: 1px solid #000; line-height: 1.1;}
-.legal-info { width: 20%; padding: 4px; text-align: center; font-weight: bold; }
+.legal-notice-box { display: flex; border: 1px solid #000; margin-top: 4px; font-size: 0.6rem; }
+.legal-text { width: 80%; padding: 2px; border-right: 1px solid #000; line-height: 1.0; }
+.legal-info { width: 20%; padding: 2px; text-align: center; font-weight: bold; }
 
-/* --- BOUTONS --- */
-.btn-area { text-align: center; padding: 15px; }
-.btn { padding: 10px 20px; border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 4px; margin: 0 5px; }
-.pdf { background: #27ae60; }
-.envoyer { background: #0056b3; }
+.btn-area { text-align: center; padding: 10px; }
+.pdf { padding: 10px 20px; background: #27ae60; color: white; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; }
 
-/* --- OPTIMISATION IMPRESSION A4 SANS MARGE --- */
+/* OPTIMISATION PDF 1 PAGE SANS DÉCALAGE */
 @media print {
-    @page { 
-        margin: 0; /* Supprime les marges forcées de l'imprimante */
-    }
-
-    body {
-        margin: 0 !important;
-        padding: 0 !important;
-        background: white !important;
-        height: 297mm !important;
-        overflow: hidden; /* Verrouille le contenu sur une seule page */
-    }
-
-    .container {
-        width: 210mm !important;
-        height: 297mm !important;
-        max-height: 297mm !important;
-        margin: 0 !important;
-        padding: 6mm 10mm 4mm 10mm !important; /* Réduction du padding haut/bas pour gagner de l'espace */
-        box-sizing: border-box !important;
-        border: none !important;
-    }
-
-    /* Gain d'espace vertical millimétré */
-    .form-block { margin-bottom: 2px !important; }
-    .plainte-bar { margin-top: 2px !important; }
-    .sig-zone { height: 40px !important; } /* Réduit pour éviter la page 2 */
-    
-    * { -webkit-print-color-adjust: exact !important; }
-}
-
-@media screen and (max-width: 600px) {
-    .grid-2 { grid-template-columns: 1fr; }
-    .main-header { flex-direction: column; height: auto; }
-    .logo-box, .title-box { width: 100%; border-right: none; }
-    .encadrement { flex-direction: column; }
-    .fiche-box { width: 100%; }
+    @page { margin: 0; }
+    .no-print { display: none !important; }
+    body { background: white !important; margin: 0 !important; padding: 0 !important; width: 210mm !important; height: 297mm !important; overflow: hidden; }
+    .container { width: 210mm !important; height: 297mm !important; max-height: 297mm !important; margin: 0 !important; padding: 5mm 9mm 3mm 9mm !important; border: none !important; }
 }

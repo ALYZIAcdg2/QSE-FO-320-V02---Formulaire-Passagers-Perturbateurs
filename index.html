@@ -6,7 +6,6 @@
     <title>QSE-FO-320 V02 - Passagers Perturbateurs</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -27,18 +26,18 @@
                 <table class="info-table">
                     <tr>
                         <td colspan="2"><strong>NOM, Prénom du passager :</strong> <input type="text" id="nom_passager" class="input-line"></td>
-                        <td class="text-right"><strong>SEXE :</strong> 
+                        <td class="text-right-shifted"><strong>SEXE :</strong> 
                             <input type="radio" name="sexe" id="sm"> <label for="sm">M</label> 
                             <input type="radio" name="sexe" id="sf"> <label for="sf">F</label>
                         </td>
                     </tr>
                     <tr>
                         <td><strong>DATE :</strong> <input type="date" class="date-picker"></td>
-                        <td><strong>HEURE DE L’INCIDENT :</strong> <input type="time" class="time-picker"></td>
+                        <td class="text-right-shifted"><strong>HEURE DE L’INCIDENT :</strong> <input type="time" class="time-picker"></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><strong>N° vol / destination :</strong> <input type="text" class="input-line w-80"></td>
+                        <td colspan="3"><strong>N° de vol / destination :</strong> <input type="text" class="input-line w-80"></td>
                     </tr>
                 </table>
             </div>
@@ -46,13 +45,13 @@
 
         <div class="form-block">
             <div class="block-header">Lieu de l’incident :</div>
-            <div class="grid-2 padding-10">
+            <div class="grid-2 padding-5">
                 <div class="col">
                     <label class="check-box"><input type="checkbox"> Comptoir Ventes</label>
                     <label class="check-box"><input type="checkbox"> Comptoir enregistrement</label>
                     <label class="check-box"><input type="checkbox"> Comptoir embarquement</label>
                 </div>
-                <div class="col">
+                <div class="col padding-left-80">
                     <label class="check-box"><input type="checkbox"> Comptoir Service Bagages</label>
                     <label class="check-box"><input type="checkbox"> Autre lieu : <input type="text" class="input-line"></label>
                     <label class="check-box">→ Préciser le hall / terminal : <input type="text" class="input-line"></label>
@@ -62,13 +61,13 @@
 
         <div class="form-block">
             <div class="block-header">Nature de l’incident :</div>
-            <div class="grid-2 padding-10">
+            <div class="grid-2 padding-5">
                 <div class="col">
                     <label class="check-box"><input type="checkbox"> Agression verbale</label>
                     <label class="check-box"><input type="checkbox"> Agression physique</label>
                     <label class="check-box"><input type="checkbox"> Dégradation matérielle</label>
                 </div>
-                <div class="col">
+                <div class="col padding-left-80">
                     <label class="check-box"><input type="checkbox"> Refus de se conformer aux règles</label>
                     <label class="check-box">Autres : <input type="text" class="input-line"></label>
                 </div>
@@ -79,13 +78,13 @@
             <div class="block-header">Cause de l’incident :</div>
             <table class="split-table">
                 <tr>
-                    <td class="w-50 border-right padding-10">
+                    <td class="w-50 border-right padding-5">
                         <label class="check-box"><input type="checkbox"> Installations / infrastructures</label>
                         <label class="check-box"><input type="checkbox"> Retard avion / annulation du vol</label>
                         <label class="check-box"><input type="checkbox"> Bagages (acceptation, tarifs…)</label>
                         <label class="check-box"><input type="checkbox"> Autres : <input type="text" class="input-line"></label>
                     </td>
-                    <td class="w-50 v-top padding-10">
+                    <td class="w-50 v-top padding-5">
                         <strong>→ Description de l’incident :</strong>
                         <textarea class="desc-area"></textarea>
                     </td>
@@ -95,13 +94,13 @@
 
         <div class="form-block">
             <div class="block-header">Mesures prises :</div>
-            <div class="grid-2 padding-10">
+            <div class="grid-2 padding-5">
                 <div class="col">
                     <label class="check-box"><input type="checkbox"> Refus d’embarquement (autorités/Cie)</label>
                     <label class="check-box"><input type="checkbox"> Débarquement (autorités/Cie)</label>
                     <label class="check-box"><input type="checkbox"> Demande d’intervention autorités</label>
                 </div>
-                <div class="col">
+                <div class="col padding-left-80">
                     <label class="check-box">Autres : <input type="text" class="input-line"></label>
                 </div>
             </div>
@@ -141,10 +140,7 @@
 
         <footer class="legal-notice-box">
             <div class="legal-text">
-                Le présent document est la propriété du Groupe Alyzia. Il ne peut être reproduit, communiqué, ou confié à des personnes externes,
-            sans l’autorisation du service QSE. Les entités intervenant dans le domaine de la sécurité doivent répondre à l’article L612-14 du
-            Code de la Sécurité Intérieure : L'autorisation d'exercice ne confère aucune prérogative de puissance publique à l'entreprise ou aux
-            personnes qui en bénéficient.
+                Le présent document est la propriété du Groupe Alyzia. Il ne peut être reproduit sans l’autorisation du service QSE. Art L612-14 du CSI.
             </div>
             <div class="legal-info">
                 QSE-FO-320 V02<br>31/03/2026<br>
@@ -154,7 +150,6 @@
 
     <div class="btn-area no-print">
         <button onclick="genererPDF()" class="btn pdf">ENREGISTRER PDF</button>
-        <button onclick="envoyerEmail()" class="btn envoyer">ENVOYER EMAIL</button>
     </div>
 
     <script src="script.js"></script>
