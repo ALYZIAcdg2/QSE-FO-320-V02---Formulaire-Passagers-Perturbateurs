@@ -330,6 +330,3 @@ html, body {
 body {
     display: block !important; /* empêche centrage vertical */
 }
-    .container {
-    overflow: visible; /* 🔥 évite coupe en bas */
-}
