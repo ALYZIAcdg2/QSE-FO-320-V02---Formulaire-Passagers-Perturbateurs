@@ -9,7 +9,7 @@ function genererPDF() {
 
     if (btnArea) btnArea.style.display = 'none';
 
-    // Fige les valeurs saisies pour la capture PDF
+    // Figer les valeurs saisies pour la capture PDF
     const fields = element.querySelectorAll('input, textarea');
     fields.forEach(field => {
         const type = (field.type || '').toLowerCase();
@@ -25,7 +25,6 @@ function genererPDF() {
         }
     });
 
-    // Pour les zones contenteditable éventuelles
     const editableZones = element.querySelectorAll('[contenteditable="true"]');
     editableZones.forEach(zone => {
         zone.setAttribute('data-value', zone.innerText || '');
@@ -38,6 +37,10 @@ function genererPDF() {
 
     const nom = nomInput && nomInput.value ? nomInput.value.trim() : "incident";
 
+    // Largeur/hauteur réelles du document
+    const elementWidth = Math.ceil(element.scrollWidth);
+    const elementHeight = Math.ceil(element.scrollHeight);
+
     const opt = {
         margin: [0, 0, 0, 0],
         filename: `PAXI_INCIDENT_${nom || "incident"}.pdf`,
@@ -48,13 +51,18 @@ function genererPDF() {
             letterRendering: true,
             scrollX: 0,
             scrollY: 0,
-            windowWidth: 794,
-            windowHeight: 1123
+            width: elementWidth,
+            height: elementHeight,
+            windowWidth: elementWidth,
+            windowHeight: elementHeight
         },
         jsPDF: {
             unit: 'mm',
-            format: [210, 297],
+            format: 'a4',
             orientation: 'portrait'
+        },
+        pagebreak: {
+            mode: ['avoid-all']
         }
     };
 
@@ -85,7 +93,13 @@ function envoyerEmail() {
     window.location.href = `mailto:votre-email@alyzia.com?subject=${sujet}&body=${corps}`;
 }
 function envoyerEmail() {
-    const nom = document.getElementById('nom_passager').value || "INCONNU";
+    const nomInput =
+        document.getElementById('nom_passager') ||
+        document.getElementById('nom-passager') ||
+        document.querySelector('input[name="nom_passager"]');
+
+    const nom = nomInput && nomInput.value ? nomInput.value.trim() : "INCONNU";
+
     const sujet = encodeURIComponent(`PAXI Incident - ${nom}`);
     const corps = encodeURIComponent(`Nouveau rapport d'incident généré pour : ${nom}`);
     window.location.href = `mailto:votre-email@alyzia.com?subject=${sujet}&body=${corps}`;
