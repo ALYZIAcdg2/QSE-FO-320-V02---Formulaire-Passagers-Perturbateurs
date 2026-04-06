@@ -20,7 +20,7 @@ body {
     width: 210mm;
     max-width: 210mm;
     min-height: 297mm;
-    margin: auto;
+    margin: 0 auto; /* 🔥 correction */
     background: white;
     padding: 8mm;
     border: 1px solid #000;
@@ -276,6 +276,7 @@ input[type="radio"] {
 
 /* --- IMPRESSION / PDF --- */
 @media print {
+
     @page {
         size: A4 portrait;
         margin: 0;
@@ -291,15 +292,18 @@ input[type="radio"] {
     }
 
     body {
-        padding: 0 !important;
+        display: block !important;
     }
 
-.container {
-    width: 210mm;
-    max-width: 210mm;
-    min-height: 297mm;
-    margin: 0 auto; /* 🔥 centre horizontal uniquement */
+    .container {
+        width: 210mm;
+        height: 297mm;
+        max-height: 297mm;
+        margin: 0 auto;
+        overflow: hidden;
+    }
 
+    /* 🔥 évite les coupures */
     .form-block,
     .signature-table,
     .encadrement,
@@ -308,7 +312,9 @@ input[type="radio"] {
         break-inside: avoid !important;
     }
 
-    .btn-area {
+    /* 🔥 cache boutons */
+    .btn-area,
+    button {
         display: none !important;
     }
 
@@ -317,16 +323,18 @@ input[type="radio"] {
         print-color-adjust: exact !important;
     }
 }
+
+/* --- FIX POSITION PDF --- */
 #document-to-print {
     width: 210mm;
     min-height: 297mm;
-    margin: 0 auto; /* 🔥 enlève centrage vertical */
+    margin: 0 auto;
 }
-/* 🔥 FIX PDF POSITION */
+
 html, body {
     height: auto;
 }
 
 body {
-    display: block !important; /* empêche centrage vertical */
+    display: block !important;
 }
