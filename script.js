@@ -1,11 +1,10 @@
 function genererPDF() {
     const element = document.getElementById('document-to-print');
-    const btn = document.querySelector('.no-print');
+    const btn = document.querySelector('.btn-area');
 
-    // Masquer le bouton avant la capture
     if (btn) btn.style.display = 'none';
 
-    // Synchronisation des inputs pour qu'ils soient visibles sur l'image
+    // Synchronisation forcée des données pour le PDF
     const inputs = element.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         if (input.type === 'checkbox' || input.type === 'radio') {
@@ -17,20 +16,19 @@ function genererPDF() {
     });
 
     const opt = {
-        margin: 0,
-        filename: 'PAXI_Incident_Rapport.pdf',
+        margin: 0, // Indispensable pour éviter le décalage
+        filename: 'PAXI_Rapport_Incident.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { 
             scale: 2, 
             useCORS: true, 
-            scrollY: 0,
-            windowWidth: 794 // Force la largeur exacte d'un A4 en pixels
+            scrollY: 0, 
+            windowWidth: 794 // Aligné sur la largeur A4 pour éviter la coupure gauche
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
-        // Réafficher le bouton après
         if (btn) btn.style.display = 'block';
     });
 }
