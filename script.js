@@ -4,7 +4,7 @@ function genererPDF() {
 
     if (btnArea) btnArea.style.display = 'none';
 
-    // Synchronisation des données saisies pour la capture
+    // Synchronisation forcée pour que les saisies apparaissent sur le PDF
     const inputs = element.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         if (input.type === 'checkbox' || input.type === 'radio') {
@@ -18,14 +18,14 @@ function genererPDF() {
     const nom = document.getElementById('nom_passager').value || "AGENT";
 
     const opt = {
-        margin: 0, // Supprime les marges de la librairie pour éviter les décalages
+        margin: 0, // Zéro marge pour éviter les décalages
         filename: `PAXI_INCIDENT_${nom}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { 
             scale: 2, 
             useCORS: true, 
             scrollY: 0,
-            windowWidth: 794 // FORCE la largeur A4 pour éviter que le document soit coupé à gauche
+            windowWidth: 794 // FIXE la largeur A4 pour stopper la coupure à gauche
         },
         jsPDF: { 
             unit: 'mm', 
