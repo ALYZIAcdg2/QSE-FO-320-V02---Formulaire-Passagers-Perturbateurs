@@ -1,62 +1,191 @@
-:root { --orange: #EF7D00; }
-
-body { font-family: Arial, sans-serif; background: #ccc; margin: 0; padding: 0; -webkit-print-color-adjust: exact; }
-
-/* Conteneur dimensionné pour correspondre exactement au format A4 */
-.container { 
-    width: 210mm; /* Largeur A4 */
-    height: 297mm; /* Hauteur A4 */
-    margin: 0 auto; 
-    background: white; 
-    padding: 7mm 12mm; /* Réduit pour laisser de la place au footer */
-    box-sizing: border-box;
-    border: 1px solid #000;
-    overflow: hidden; /* Empêche la création d'une page 2 */
+:root { 
+    --orange: #EF7D00; 
 }
 
-.main-header { display: flex; border: 1.5pt solid black; margin-bottom: 4px; height: 65px; }
-.logo-box { width: 30%; border-right: 1.5pt solid black; display: flex; align-items: center; justify-content: center; }
-.logo-box img { max-height: 50px; }
-.title-box { width: 70%; text-align: center; }
-.title-box h1 { margin: 0; font-size: 1.3rem; color: var(--orange); border-bottom: 1.5pt solid black; padding: 2px; }
-.title-box h2 { margin: 0; font-size: 1rem; padding: 2px; }
+/* --- STYLES GÉNÉRAUX --- */
+body { 
+    font-family: Arial, sans-serif; 
+    background: #ccc; 
+    padding: 20px; 
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
 
-.form-block { margin-bottom: 4px; border: 1.5pt solid black; }
-.block-header { background: #E7E6E6 !important; padding: 3px 10px; font-weight: bold; font-size: 0.85rem; border-bottom: 1.5pt solid black; text-decoration: underline; }
+.container { 
+    max-width: 800px;
+    margin: auto; 
+    background: white; 
+    padding: 10mm; 
+    border: 1px solid #000; 
+    box-sizing: border-box;
+}
+
+/* --- EN-TÊTE --- */
+.main-header {
+    display: flex;
+    border: 1px solid #000;
+    margin-bottom: 5px;
+    height: 70px;
+}
+
+.logo-box {
+    width: 30%;
+    border-right: 1px solid #000;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-box img { max-height: 55px; width: auto; }
+
+.title-box {
+    width: 70%;
+    text-align: center;
+}
+
+.title-box h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--orange);
+    border-bottom: 1px solid #000;
+    padding: 4px;
+}
+
+.title-box h2 {
+    margin: 2px 0;
+    font-size: 1.1rem;
+}
+
+/* --- BLOCS D'INFORMATIONS --- */
+.form-block { margin-bottom: 5px; border: 1px solid #000; }
+.block-header { 
+    background: #E7E6E6 !important; 
+    color: black; 
+    padding: 4px 10px; 
+    font-weight: bold; 
+    font-size: 0.9rem; 
+    border-bottom: 1px solid #000;
+    text-decoration: underline;
+}
 
 .info-table, .split-table { width: 100%; border-collapse: collapse; }
-.info-table td { padding: 3px 8px; vertical-align: middle; font-size: 0.85rem; }
+.info-table td { padding: 5px 8px; vertical-align: middle; font-size: 0.9rem; }
 
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; }
-.padding-5 { padding: 5px; }
-.padding-left-80 { padding-left: 80px; } /* Décalage pour aligner la colonne droite */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.padding-10 { padding: 8px; }
 
-.input-line { border: none; border-bottom: 1px solid black; font-weight: bold; outline: none; background: transparent; font-size: 0.85rem; }
-.w-80 { width: 80%; } .flex-grow { flex-grow: 1; margin-left: 10px; }
+.input-line { 
+    border: none; 
+    border-bottom: 1.5px solid black; 
+    font-weight: bold; 
+    outline: none; 
+    background: transparent; 
+    font-size: 0.9rem;
+}
 
-.check-box { display: block; margin-bottom: 2px; cursor: pointer; font-size: 0.82rem; }
-input[type="checkbox"] { transform: scale(1.05); margin-right: 6px; }
+.w-80 { width: 80%; }
+.w-100 { width: 100%; }
+.flex-grow { flex-grow: 1; margin-left: 10px; }
 
-.desc-area { width: 100%; height: 75px; border: 1pt solid black; resize: none; padding: 5px; box-sizing: border-box; font-size: 0.85rem; }
-.plainte-bar { padding: 4px 10px; margin-top: 4px; border: 1.5pt solid black; display: flex; align-items: center; background: #f2f2f2 !important; font-size: 0.85rem; }
+.check-box { display: block; margin-bottom: 3px; cursor: pointer; font-size: 0.85rem; }
+input[type="checkbox"], input[type="radio"] { transform: scale(1.1); margin-right: 8px; }
 
-.signature-table { width: 100%; border-collapse: collapse; margin-top: 4px; border: 1.5pt solid black; }
-.sub-title-sig { background-color: #f2f2f2; border: 1pt solid black; padding: 2px; width: 50%; font-size: 0.8rem; font-style: italic; text-decoration: underline; text-align: center; }
-.sig-zone { border: 1pt solid black; height: 45px; vertical-align: top; } /* Hauteur réduite pour gagner de l'espace */
+.desc-area { 
+    width: 100%; 
+    height: 80px; 
+    border: 1px solid #000; 
+    resize: none; 
+    font-family: Arial; 
+    padding: 5px; 
+    box-sizing: border-box; 
+    font-size: 0.9rem;
+}
 
-.encadrement { display: flex; gap: 15px; margin-top: 8px; }
-.fiche-box { width: 130px; border: 1.5pt solid black; padding: 8px; font-size: 0.85rem; }
-.encadrement-content { flex-grow: 1; border: 1.5pt solid black; padding: 8px; }
-.blue-title { color: blue !important; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px; }
-.level-text { color: blue !important; font-weight: bold; }
+.plainte-bar { 
+    padding: 6px 10px; 
+    margin-top: 5px; 
+    border: 1px solid #000; 
+    display: flex; 
+    align-items: center; 
+    background: #f2f2f2 !important; 
+    font-size: 0.9rem;
+}
 
-.legal-notice-box { display: flex; border: 1.5pt solid black; margin-top: 6px; font-size: 0.65rem; }
-.legal-text { width: 85%; padding: 4px; border-right: 1pt solid black; line-height: 1.1; }
-.legal-info { width: 15%; padding: 4px; text-align: center; font-weight: bold; }
+/* --- SIGNATURES --- */
+.signature-table { width: 100%; border-collapse: collapse; margin-top: 5px; border: 1px solid #000; }
+.sub-title-sig { 
+    background-color: #f2f2f2; 
+    border: 1px solid #000; 
+    padding: 4px; 
+    width: 50%; 
+    font-size: 0.85rem; 
+    font-style: italic;
+    text-decoration: underline;
+    text-align: center;
+}
 
+.sig-zone { border: 1px solid #000; height: 65px; vertical-align: top; }
+.sig-content { width: 100%; height: 100%; padding: 5px; font-weight: bold; }
+
+/* --- ENCADREMENT --- */
+.encadrement {
+    display: flex; 
+    gap: 15px;
+    margin-top: 8px;
+    align-items: stretch;
+}
+
+.fiche-box {
+    width: 130px; 
+    border: 1px solid black;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+}
+
+.encadrement-content {
+    flex-grow: 1; 
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.blue-title { color: #0000FF !important; font-weight: bold; font-size: 0.95rem; margin-bottom: 5px; }
+.level-text { color: #0000FF !important; font-weight: bold; }
+
+/* --- BAS DE PAGE --- */
+.legal-notice-box { display: flex; border: 1px solid #000; margin-top: 8px; font-size: 0.65rem; }
+.legal-text { width: 80%; padding: 4px; border-right: 1px solid #000; line-height: 1.1;}
+.legal-info { width: 20%; padding: 4px; text-align: center; font-weight: bold; }
+
+/* --- BOUTONS --- */
+.btn-area { text-align: center; padding: 15px; }
+.btn { padding: 10px 20px; border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 4px; margin: 0 5px; }
+.pdf { background: #27ae60; }
+.envoyer { background: #0056b3; }
+
+/* --- OPTIMISATION IMPRESSION A4 SANS MARGE --- */
 @media print {
     @page { margin: 0; }
-    .no-print { display: none !important; }
-    body { background: white !important; }
-    .container { margin: 0; border: none; width: 210mm; height: 297mm; }
+    .no-print, .btn-area { display: none !important; }
+    body { background: white !important; margin: 0 !important; padding: 0 !important; width: 210mm !important; height: 297mm !important; }
+    .container { 
+        width: 210mm !important; 
+        height: 297mm !important; 
+        max-width: 210mm !important;
+        margin: 0 !important;
+        padding: 8mm !important; 
+        border: none !important; 
+        box-sizing: border-box !important;
+    }
+    * { -webkit-print-color-adjust: exact !important; }
+}
+
+@media screen and (max-width: 600px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .main-header { flex-direction: column; height: auto; }
+    .logo-box, .title-box { width: 100%; border-right: none; }
+    .encadrement { flex-direction: column; }
+    .fiche-box { width: 100%; }
 }
