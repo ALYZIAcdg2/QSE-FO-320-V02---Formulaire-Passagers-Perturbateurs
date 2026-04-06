@@ -296,17 +296,9 @@ input[type="radio"] {
 
 .container {
     width: 210mm;
-    height: 297mm;
-
-    margin: 0;            /* ❌ IMPORTANT : enlève le centrage */
-    position: relative;
-    left: 0;
-
-    background: white;
-    padding: 8mm;
-    box-sizing: border-box;
-    border: 1px solid #000;
-}
+    max-width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto; /* 🔥 centre horizontal uniquement */
 
     .form-block,
     .signature-table,
@@ -328,5 +320,16 @@ input[type="radio"] {
 #document-to-print {
     width: 210mm;
     min-height: 297mm;
-    margin: auto;
+    margin: 0 auto; /* 🔥 enlève centrage vertical */
+}
+/* 🔥 FIX PDF POSITION */
+html, body {
+    height: auto;
+}
+
+body {
+    display: block !important; /* empêche centrage vertical */
+}
+    .container {
+    overflow: visible; /* 🔥 évite coupe en bas */
 }
