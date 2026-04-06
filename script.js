@@ -2,64 +2,39 @@ function genererPDF() {
     const element = document.getElementById('document-to-print');
     const btnArea = document.querySelector('.btn-area');
 
-    if (typeof html2pdf === "undefined") {
-        showAlert("Erreur : la librairie PDF n'est pas chargée.");
-        return;
-    }
-
     if (btnArea) btnArea.style.display = 'none';
 
-    // Synchronisation forcée des données saisies
+    // Synchronisation forcée des données pour le rendu
     const inputs = element.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         if (input.type === 'checkbox' || input.type === 'radio') {
-            if (input.checked) {
-                input.setAttribute('checked', 'checked');
-            } else {
-                input.removeAttribute('checked');
-            }
+            if (input.checked) input.setAttribute('checked', 'checked');
+            else input.removeAttribute('checked');
         } else {
-            input.setAttribute('value', (input.value || '').toUpperCase());
+            input.setAttribute('value', input.value.toUpperCase());
         }
     });
 
-    const sigs = element.querySelectorAll('.sig-content');
-    sigs.forEach(sig => {
-        sig.innerHTML = sig.innerText.toUpperCase();
-    });
-
-    const nom = document.getElementById('nom-agent').value || "AGENT";
-
     const opt = {
-        margin: [5, 5, 5, 5],
-        filename: `EVAL_DGR_${nom}.pdf`,
+        margin: 0,
+        filename: 'PAXI_INCIDENT.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: {
-            scale: 1,
-            useCORS: true,
-            scrollX: 0,
+        html2canvas: { 
+            scale: 2, 
+            useCORS: true, 
             scrollY: 0,
-            letterRendering: true
+            windowWidth: 794 // FIXE la largeur pour éviter la coupure gauche
         },
-        jsPDF: {
-            unit: 'mm',
-            format: 'a4',
-            orientation: 'portrait'
+        jsPDF: { 
+            unit: 'mm', 
+            format: 'a4', 
+            orientation: 'portrait' 
         }
     };
 
-    html2pdf()
-        .set(opt)
-        .from(element)
-        .save()
-        .then(() => {
-            if (btnArea) btnArea.style.display = 'block';
-        })
-        .catch(err => {
-            if (btnArea) btnArea.style.display = 'block';
-            console.error("Erreur PDF:", err);
-            showAlert("Erreur lors de la génération du PDF.");
-        });
+    html2pdf().set(opt).from(element).save().then(() => {
+        if (btnArea) btnArea.style.display = 'block';
+    });
 }
 
 function envoyerEmail() {
