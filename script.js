@@ -66,19 +66,22 @@ function genererPDF() {
         }
     };
 
-    html2pdf()
-        .set(opt)
-        .from(element)
-        .save()
-        .then(() => {
-            if (btnArea) btnArea.style.display = 'block';
-        })
-        .catch((err) => {
-            if (btnArea) btnArea.style.display = 'block';
-            console.error("Erreur PDF :", err);
-            alert("Erreur lors de la génération du PDF.");
-        });
-}
+html2canvas: {
+    scale: 2,
+    useCORS: true,
+    letterRendering: true,
+
+    // 🔥 CORRECTION DU DÉCALAGE
+    scrollX: -window.scrollX,
+    scrollY: -window.scrollY,
+
+    // 🔥 CAPTURE EXACTE DU BLOC
+    x: 0,
+    y: 0,
+
+    windowWidth: document.documentElement.scrollWidth,
+    windowHeight: document.documentElement.scrollHeight
+},
 
 function envoyerEmail() {
     const nomInput =
