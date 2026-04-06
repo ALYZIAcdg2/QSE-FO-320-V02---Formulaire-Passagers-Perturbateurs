@@ -1,79 +1,62 @@
-/* --- CONFIGURATION A4 --- */
-body {
-    margin: 0;
-    padding: 0;
-    background: #ccc;
-    font-family: Arial, sans-serif;
-    -webkit-print-color-adjust: exact;
-}
+:root { --orange: #EF7D00; }
 
-/* Verrouillage du conteneur pour le PDF */
-.page {
-    width: 210mm;
-    height: 296mm; /* Réduit pour éviter le saut de page automatique */
-    margin: 0 auto;
-    background: white;
-    padding: 8mm 12mm;
+body { font-family: Arial, sans-serif; background: #ccc; margin: 0; padding: 0; -webkit-print-color-adjust: exact; }
+
+/* Conteneur dimensionné pour correspondre exactement au format A4 */
+.container { 
+    width: 210mm; /* Largeur A4 */
+    height: 297mm; /* Hauteur A4 */
+    margin: 0 auto; 
+    background: white; 
+    padding: 7mm 12mm; /* Réduit pour laisser de la place au footer */
     box-sizing: border-box;
-    overflow: hidden; /* Empêche les éléments de baver sur une page 2 */
+    border: 1px solid #000;
+    overflow: hidden; /* Empêche la création d'une page 2 */
 }
 
-/* HEADER */
-.header { display: flex; border: 2px solid black; height: 85px; }
-.header-left { width: 30%; border-right: 2px solid black; display: flex; align-items: center; justify-content: center; }
-.logo { height: 65px; }
-.header-right { flex-grow: 1; display: flex; flex-direction: column; }
-.title { text-align: center; font-size: 24pt; font-weight: bold; color: #f28c00; border-bottom: 2px solid black; padding: 2px 0; }
-.subtitle { text-align: center; font-size: 14pt; font-weight: bold; padding-top: 5px; }
+.main-header { display: flex; border: 1.5pt solid black; margin-bottom: 4px; height: 65px; }
+.logo-box { width: 30%; border-right: 1.5pt solid black; display: flex; align-items: center; justify-content: center; }
+.logo-box img { max-height: 50px; }
+.title-box { width: 70%; text-align: center; }
+.title-box h1 { margin: 0; font-size: 1.3rem; color: var(--orange); border-bottom: 1.5pt solid black; padding: 2px; }
+.title-box h2 { margin: 0; font-size: 1rem; padding: 2px; }
 
-/* SECTIONS */
-.section { font-size: 11pt; font-weight: bold; border-bottom: 1.5px solid black; margin-top: 10px; }
-.gray { background: #d9d9d9 !important; padding: 4px 10px; }
+.form-block { margin-bottom: 4px; border: 1.5pt solid black; }
+.block-header { background: #E7E6E6 !important; padding: 3px 10px; font-weight: bold; font-size: 0.85rem; border-bottom: 1.5pt solid black; text-decoration: underline; }
 
-/* ALIGNEMENTS ET DÉCALAGE (PHOTO 8 & IMAGE_63C2F6) */
-.row { display: flex; margin-top: 6px; align-items: center; }
-.col-left { width: 50%; display: flex; align-items: center; }
-.col-right-shifted { width: 50%; display: flex; align-items: center; padding-left: 80px; gap: 12px; }
-.col-right-shifted-list { width: 50%; padding-left: 80px; }
+.info-table, .split-table { width: 100%; border-collapse: collapse; }
+.info-table td { padding: 3px 8px; vertical-align: middle; font-size: 0.85rem; }
 
-.bold-text { font-weight: bold; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; }
+.padding-5 { padding: 5px; }
+.padding-left-80 { padding-left: 80px; } /* Décalage pour aligner la colonne droite */
 
-/* INPUTS SANS POINTS */
-.input-line { border: none; border-bottom: 1px solid black; font-weight: bold; font-size: 10.5pt; outline: none; padding: 2px; }
-.flex-grow { flex-grow: 1; margin-left: 10px; }
-.w-80 { width: 80%; } .w-100 { width: 100%; }
+.input-line { border: none; border-bottom: 1px solid black; font-weight: bold; outline: none; background: transparent; font-size: 0.85rem; }
+.w-80 { width: 80%; } .flex-grow { flex-grow: 1; margin-left: 10px; }
 
-/* CHECKBOX */
-input[type="checkbox"], input[type="radio"] { transform: scale(1.1); cursor: pointer; }
-.check { margin: 4px 0; display: flex; align-items: center; gap: 8px; font-size: 10pt; }
+.check-box { display: block; margin-bottom: 2px; cursor: pointer; font-size: 0.82rem; }
+input[type="checkbox"] { transform: scale(1.05); margin-right: 6px; }
 
-/* CAUSE & DESCRIPTION */
-.split { display: flex; margin-top: 8px; gap: 15px; }
-.split-left { width: 48%; }
-.split-right { width: 52%; }
-.description-area { border: 1.5px solid black; height: 90px; width: 100%; font-family: Arial; padding: 5px; box-sizing: border-box; resize: none; }
+.desc-area { width: 100%; height: 75px; border: 1pt solid black; resize: none; padding: 5px; box-sizing: border-box; font-size: 0.85rem; }
+.plainte-bar { padding: 4px 10px; margin-top: 4px; border: 1.5pt solid black; display: flex; align-items: center; background: #f2f2f2 !important; font-size: 0.85rem; }
 
-/* SIGNATURES */
-.signatures { display: flex; gap: 20px; margin-top: 12px; }
-.signature-box { width: 50%; }
-.box-editable { border: 1.5px solid black; height: 70px; margin-top: 5px; background: #fff; }
+.signature-table { width: 100%; border-collapse: collapse; margin-top: 4px; border: 1.5pt solid black; }
+.sub-title-sig { background-color: #f2f2f2; border: 1pt solid black; padding: 2px; width: 50%; font-size: 0.8rem; font-style: italic; text-decoration: underline; text-align: center; }
+.sig-zone { border: 1pt solid black; height: 45px; vertical-align: top; } /* Hauteur réduite pour gagner de l'espace */
 
-/* ENCADREMENT BAS (BLEU) */
-.encadrement { display: flex; gap: 15px; margin-top: 15px; }
-.fiche-box { width: 130px; border: 1.5px solid black; padding: 8px; }
-.title-blue { color: blue !important; font-weight: bold; font-size: 12pt; margin-bottom: 5px; }
+.encadrement { display: flex; gap: 15px; margin-top: 8px; }
+.fiche-box { width: 130px; border: 1.5pt solid black; padding: 8px; font-size: 0.85rem; }
+.encadrement-content { flex-grow: 1; border: 1.5pt solid black; padding: 8px; }
+.blue-title { color: blue !important; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px; }
 .level-text { color: blue !important; font-weight: bold; }
 
-/* FOOTER */
-.footer { display: flex; border: 1.5px solid black; margin-top: 12px; font-size: 8pt; }
-.footer-left { flex: 1; padding: 6px; line-height: 1.1; border-right: 1.5px solid black; }
-.footer-right { width: 160px; text-align: right; padding: 6px; font-weight: bold; }
-
-/* BOUTONS */
-.no-print { text-align: center; padding: 20px; }
-.btn-pdf { padding: 12px 25px; background: #27ae60; color: white; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; }
+.legal-notice-box { display: flex; border: 1.5pt solid black; margin-top: 6px; font-size: 0.65rem; }
+.legal-text { width: 85%; padding: 4px; border-right: 1pt solid black; line-height: 1.1; }
+.legal-info { width: 15%; padding: 4px; text-align: center; font-weight: bold; }
 
 @media print {
-    body { background: white; }
+    @page { margin: 0; }
     .no-print { display: none !important; }
+    body { background: white !important; }
+    .container { margin: 0; border: none; width: 210mm; height: 297mm; }
 }
