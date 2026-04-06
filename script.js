@@ -2,41 +2,64 @@ function genererPDF() {
     const element = document.getElementById('document-to-print');
     const btnArea = document.querySelector('.btn-area');
 
+    if (typeof html2pdf === "undefined") {
+        showAlert("Erreur : la librairie PDF n'est pas chargée.");
+        return;
+    }
+
     if (btnArea) btnArea.style.display = 'none';
 
-    // Synchronisation forcée pour que les saisies apparaissent sur le PDF
+    // Synchronisation forcée des données saisies
     const inputs = element.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         if (input.type === 'checkbox' || input.type === 'radio') {
-            if (input.checked) input.setAttribute('checked', 'checked');
-            else input.removeAttribute('checked');
+            if (input.checked) {
+                input.setAttribute('checked', 'checked');
+            } else {
+                input.removeAttribute('checked');
+            }
         } else {
-            input.setAttribute('value', input.value.toUpperCase());
+            input.setAttribute('value', (input.value || '').toUpperCase());
         }
     });
 
-    const nom = document.getElementById('nom_passager').value || "AGENT";
+    const sigs = element.querySelectorAll('.sig-content');
+    sigs.forEach(sig => {
+        sig.innerHTML = sig.innerText.toUpperCase();
+    });
+
+    const nom = document.getElementById('nom-agent').value || "AGENT";
 
     const opt = {
-        margin: 0, // Zéro marge pour éviter les décalages
-        filename: `PAXI_INCIDENT_${nom}.pdf`,
+        margin: [5, 5, 5, 5],
+        filename: `EVAL_DGR_${nom}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-            scale: 2, 
-            useCORS: true, 
+        html2canvas: {
+            scale: 1,
+            useCORS: true,
+            scrollX: 0,
             scrollY: 0,
-            windowWidth: 794 // FIXE la largeur A4 pour stopper la coupure à gauche
+            letterRendering: true
         },
-        jsPDF: { 
-            unit: 'mm', 
-            format: 'a4', 
-            orientation: 'portrait' 
+        jsPDF: {
+            unit: 'mm',
+            format: 'a4',
+            orientation: 'portrait'
         }
     };
 
-    html2pdf().set(opt).from(element).save().then(() => {
-        if (btnArea) btnArea.style.display = 'block';
-    });
+    html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(() => {
+            if (btnArea) btnArea.style.display = 'block';
+        })
+        .catch(err => {
+            if (btnArea) btnArea.style.display = 'block';
+            console.error("Erreur PDF:", err);
+            showAlert("Erreur lors de la génération du PDF.");
+        });
 }
 
 function envoyerEmail() {
