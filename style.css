@@ -76,6 +76,12 @@ body {
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
 .padding-10 { padding: 8px; }
 
+/* DÉCALAGE COLONNE DROITE (UNIQUEMENT SUR PC) */
+/* Empêche le contenu de sortir de l'écran sur mobile */
+@media screen and (min-width: 601px) {
+    .col:nth-child(2) { padding-left: 80px; }
+}
+
 .input-line { 
     border: none; 
     border-bottom: 1.5px solid black; 
@@ -169,7 +175,14 @@ input[type="checkbox"], input[type="radio"] { transform: scale(1.1); margin-righ
 @media print {
     @page { margin: 0; }
     .no-print, .btn-area { display: none !important; }
-    body { background: white !important; margin: 0 !important; padding: 0 !important; width: 210mm !important; height: 297mm !important; }
+    body { 
+        background: white !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        width: 210mm !important; 
+        height: 297mm !important; 
+        overflow: hidden; /* Empêche la création d'une page 2 vide */
+    }
     .container { 
         width: 210mm !important; 
         height: 297mm !important; 
@@ -182,44 +195,14 @@ input[type="checkbox"], input[type="radio"] { transform: scale(1.1); margin-righ
     * { -webkit-print-color-adjust: exact !important; }
 }
 
-/* --- CONFIGURATION MOBILE TYPE EVALUATION PRATIQUE --- */
+/* --- CONFIGURATION MOBILE --- */
 @media screen and (max-width: 600px) {
-    body {
-        padding: 5px; /* Réduit l'espace autour du document */
-    }
-
-    .container {
-        width: 100% !important;
-        padding: 8px !important;
-        margin: 0 auto !important;
-        border: 1px solid #000;
-        box-sizing: border-box;
-    }
-
-    /* Force les colonnes à s'empiler proprement */
-    .grid-2 {
-        display: block !important;
-    }
-
-    .col {
-        width: 100% !important;
-        padding-left: 0 !important; /* Supprime le décalage de la colonne droite sur mobile */
-        margin-bottom: 10px;
-    }
-
-    /* Ajustement des inputs pour qu'ils ne sortent pas de l'écran */
-    .input-line {
-        width: 100% !important;
-    }
-
-    /* Header plus petit sur mobile */
-    .main-header {
-        flex-direction: column;
-        height: auto !important;
-    }
-
-    .logo-box, .title-box {
-        width: 100% !important;
-        border-right: none !important;
-    }
+    body { padding: 5px; }
+    .container { width: 100% !important; padding: 10px !important; margin: 0 !important; }
+    .grid-2 { display: block !important; }
+    .col { width: 100% !important; padding-left: 0 !important; margin-bottom: 10px; }
+    .main-header { flex-direction: column; height: auto !important; }
+    .logo-box, .title-box { width: 100% !important; border-right: none !important; }
+    .encadrement { flex-direction: column; }
+    .fiche-box { width: 100%; margin-bottom: 5px; }
 }
