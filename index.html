@@ -52,7 +52,7 @@
                     <label class="check-box"><input type="checkbox"> Comptoir enregistrement</label>
                     <label class="check-box"><input type="checkbox"> Comptoir embarquement</label>
                 </div>
-                <div class="col">
+                <div class="col desktop-offset">
                     <label class="check-box"><input type="checkbox"> Comptoir Service Bagages</label>
                     <label class="check-box"><input type="checkbox"> Autre lieu : <input type="text" class="input-line"></label>
                     <label class="check-box">→ Préciser le hall / terminal : <input type="text" class="input-line"></label>
@@ -68,7 +68,7 @@
                     <label class="check-box"><input type="checkbox"> Agression physique</label>
                     <label class="check-box"><input type="checkbox"> Dégradation matérielle</label>
                 </div>
-                <div class="col">
+                <div class="col desktop-offset">
                     <label class="check-box"><input type="checkbox"> Refus de se conformer aux règles</label>
                     <label class="check-box">Autres : <input type="text" class="input-line"></label>
                 </div>
@@ -101,7 +101,7 @@
                     <label class="check-box"><input type="checkbox"> Débarquement (autorités/Cie)</label>
                     <label class="check-box"><input type="checkbox"> Demande d’intervention autorités</label>
                 </div>
-                <div class="col">
+                <div class="col desktop-offset">
                     <label class="check-box">Autres : <input type="text" class="input-line"></label>
                 </div>
             </div>
@@ -141,10 +141,7 @@
 
         <footer class="legal-notice-box">
             <div class="legal-text">
-                Le présent document est la propriété du Groupe Alyzia. Il ne peut être reproduit, communiqué, ou confié à des personnes externes,
-            sans l’autorisation du service QSE. Les entités intervenant dans le domaine de la sécurité doivent répondre à l’article L612-14 du
-            Code de la Sécurité Intérieure : L'autorisation d'exercice ne confère aucune prérogative de puissance publique à l'entreprise ou aux
-            personnes qui en bénéficient.
+                Le présent document est la propriété du Groupe Alyzia. Il ne peut être reproduit sans autorisation du service QSE. Art L612-14 du CSI.
             </div>
             <div class="legal-info">
                 QSE-FO-320 V02<br>31/03/2026<br>
@@ -153,7 +150,7 @@
     </div>
 
     <div class="btn-area no-print">
-        <button class="btn pdf" onclick="genererPDF()">Générer le PDF</button>
+        <button onclick="genererPDF()" class="btn pdf">ENREGISTRER PDF</button>
         <button onclick="envoyerEmail()" class="btn envoyer">ENVOYER EMAIL</button>
     </div>
 

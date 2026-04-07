@@ -1,39 +1,32 @@
-:root {
-    --orange: #EF7D00;
+:root { 
+    --orange: #EF7D00; 
 }
 
 /* --- STYLES GÉNÉRAUX --- */
-html, body {
+body { 
+    font-family: Arial, sans-serif; 
+    background: #ccc; 
+    padding: 20px; 
     margin: 0;
-    padding: 0;
-    background: #ccc;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    font-family: Arial, sans-serif;
 }
 
-body {
-    padding: 0px;
-}
-
-.container {
-    width: 210mm;
-    max-width: 210mm;
-    min-height: 297mm;
-    margin: 0 auto; /* 🔥 correction */
-    background: white;
-    padding: 8mm;
-    border: 1px solid #000;
+.container { 
+    max-width: 800px;
+    margin: auto; 
+    background: white; 
+    padding: 10mm; 
+    border: 1px solid #000; 
     box-sizing: border-box;
-    overflow: hidden;
 }
 
 /* --- EN-TÊTE --- */
 .main-header {
     display: flex;
     border: 1px solid #000;
-    margin-bottom: 8px;
-    height: 78px;
+    margin-bottom: 5px;
+    height: 70px;
 }
 
 .logo-box {
@@ -43,298 +36,190 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
 }
 
-.logo-box img {
-    max-height: 62px;
-    width: auto;
-    max-width: 100%;
-}
+.logo-box img { max-height: 55px; width: auto; }
 
 .title-box {
     width: 70%;
     text-align: center;
-    box-sizing: border-box;
 }
 
 .title-box h1 {
     margin: 0;
-    font-size: 2.1rem;
+    font-size: 1.4rem;
     color: var(--orange);
     border-bottom: 1px solid #000;
-    padding: 2px 4px 4px 4px;
-    line-height: 1.05;
+    padding: 4px;
 }
 
 .title-box h2 {
-    margin: 4px 0 0 0;
-    font-size: 1.05rem;
-    line-height: 1.1;
+    margin: 2px 0;
+    font-size: 1.1rem;
 }
 
 /* --- BLOCS D'INFORMATIONS --- */
-.form-block {
-    margin-bottom: 5px;
-    border: 1px solid #000;
-}
-
-.block-header {
-    background: #E7E6E6 !important;
-    color: black;
-    padding: 4px 10px;
-    font-weight: bold;
-    font-size: 0.95rem;
+.form-block { margin-bottom: 5px; border: 1px solid #000; }
+.block-header { 
+    background: #E7E6E6 !important; 
+    color: black; 
+    padding: 4px 10px; 
+    font-weight: bold; 
+    font-size: 0.9rem; 
     border-bottom: 1px solid #000;
     text-decoration: underline;
 }
 
-.info-table,
-.split-table,
-.signature-table {
-    width: 100%;
-    border-collapse: collapse;
-}
+.info-table, .split-table { width: 100%; border-collapse: collapse; }
+.info-table td { padding: 5px 8px; vertical-align: middle; font-size: 0.9rem; }
 
-.info-table td {
-    padding: 5px 8px;
-    vertical-align: top;
-    font-size: 0.92rem;
-    box-sizing: border-box;
-}
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.padding-10 { padding: 8px; }
 
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-}
-
-.padding-10 {
-    padding: 8px;
-}
-
-.input-line {
-    border: none;
-    border-bottom: 1.2px solid black;
-    font-weight: bold;
-    outline: none;
-    background: transparent;
-    font-size: 0.92rem;
-    box-sizing: border-box;
+.input-line { 
+    border: none; 
+    border-bottom: 1.5px solid black; 
+    font-weight: bold; 
+    outline: none; 
+    background: transparent; 
+    font-size: 0.9rem;
 }
 
 .w-80 { width: 80%; }
 .w-100 { width: 100%; }
 .flex-grow { flex-grow: 1; margin-left: 10px; }
 
-.check-box {
-    display: block;
-    margin-bottom: 5px;
-    cursor: pointer;
-    font-size: 0.92rem;
+.check-box { display: block; margin-bottom: 3px; cursor: pointer; font-size: 0.85rem; }
+input[type="checkbox"], input[type="radio"] { transform: scale(1.1); margin-right: 8px; }
+
+.desc-area { 
+    width: 100%; 
+    height: 80px; 
+    border: 1px solid #000; 
+    resize: none; 
+    font-family: Arial; 
+    padding: 5px; 
+    box-sizing: border-box; 
+    font-size: 0.9rem;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
-    transform: scale(1.05);
-    margin-right: 8px;
-    vertical-align: middle;
-}
-
-.desc-area {
-    width: 100%;
-    height: 88px;
-    border: 1px solid #000;
-    resize: none;
-    font-family: Arial, sans-serif;
-    padding: 5px;
-    box-sizing: border-box;
-    font-size: 0.92rem;
-}
-
-.plainte-bar {
-    padding: 6px 10px;
-    margin-top: 5px;
-    border: 1px solid #000;
-    display: flex;
-    align-items: center;
-    background: #f2f2f2 !important;
-    font-size: 0.95rem;
-    font-weight: bold;
+.plainte-bar { 
+    padding: 6px 10px; 
+    margin-top: 5px; 
+    border: 1px solid #000; 
+    display: flex; 
+    align-items: center; 
+    background: #f2f2f2 !important; 
+    font-size: 0.9rem;
 }
 
 /* --- SIGNATURES --- */
-.signature-table {
-    margin-top: 5px;
-    border: 1px solid #000;
-}
-
-.sub-title-sig {
-    background-color: #f2f2f2;
-    border: 1px solid #000;
-    padding: 4px;
-    width: 50%;
-    font-size: 0.9rem;
+.signature-table { width: 100%; border-collapse: collapse; margin-top: 5px; border: 1px solid #000; }
+.sub-title-sig { 
+    background-color: #f2f2f2; 
+    border: 1px solid #000; 
+    padding: 4px; 
+    width: 50%; 
+    font-size: 0.85rem; 
     font-style: italic;
     text-decoration: underline;
     text-align: center;
-    font-weight: bold;
 }
 
-.sig-zone {
-    border: 1px solid #000;
-    height: 70px;
-    vertical-align: top;
-}
-
-.sig-content {
-    width: 100%;
-    height: 100%;
-    padding: 5px;
-    font-weight: bold;
-    box-sizing: border-box;
-}
+.sig-zone { border: 1px solid #000; height: 65px; vertical-align: top; }
+.sig-content { width: 100%; height: 100%; padding: 5px; font-weight: bold; }
 
 /* --- ENCADREMENT --- */
 .encadrement {
-    display: flex;
+    display: flex; 
     gap: 15px;
     margin-top: 8px;
     align-items: stretch;
 }
 
 .fiche-box {
-    width: 130px;
+    width: 130px; 
     border: 1px solid black;
     padding: 8px;
     box-sizing: border-box;
-    font-size: 0.95rem;
-    font-weight: bold;
+    font-size: 0.9rem;
 }
 
 .encadrement-content {
-    flex-grow: 1;
+    flex-grow: 1; 
     border: 1px solid black;
     padding: 8px;
-    box-sizing: border-box;
 }
 
-.blue-title {
-    color: #0000FF !important;
-    font-weight: bold;
-    font-size: 1.05rem;
-    margin-bottom: 5px;
-}
-
-.level-text {
-    color: #0000FF !important;
-    font-weight: bold;
-}
+.blue-title { color: #0000FF !important; font-weight: bold; font-size: 0.95rem; margin-bottom: 5px; }
+.level-text { color: #0000FF !important; font-weight: bold; }
 
 /* --- BAS DE PAGE --- */
-.legal-notice-box {
-    display: flex;
-    border: 1px solid #000;
-    margin-top: 8px;
-    font-size: 0.68rem;
-}
-
-.legal-text {
-    width: 80%;
-    padding: 4px;
-    border-right: 1px solid #000;
-    line-height: 1.15;
-    box-sizing: border-box;
-}
-
-.legal-info {
-    width: 20%;
-    padding: 4px;
-    text-align: center;
-    font-weight: bold;
-    box-sizing: border-box;
-}
+.legal-notice-box { display: flex; border: 1px solid #000; margin-top: 8px; font-size: 0.65rem; }
+.legal-text { width: 80%; padding: 4px; border-right: 1px solid #000; line-height: 1.1;}
+.legal-info { width: 20%; padding: 4px; text-align: center; font-weight: bold; }
 
 /* --- BOUTONS --- */
-.btn-area {
-    text-align: center;
-    padding: 15px;
-}
-
-.btn {
-    padding: 10px 20px;
-    border: none;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 4px;
-    margin: 0 5px;
-}
-
+.btn-area { text-align: center; padding: 15px; }
+.btn { padding: 10px 20px; border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 4px; margin: 0 5px; }
 .pdf { background: #27ae60; }
 .envoyer { background: #0056b3; }
 
-/* --- IMPRESSION / PDF --- */
+/* --- OPTIMISATION IMPRESSION A4 SANS MARGE --- */
 @media print {
-
-    @page {
-        size: A4 portrait;
-        margin: 0;
-    }
-
-    html, body {
-        width: 210mm;
-        height: 297mm;
+    @page { margin: 0; }
+    .no-print, .btn-area { display: none !important; }
+    body { background: white !important; margin: 0 !important; padding: 0 !important; width: 210mm !important; height: 297mm !important; }
+    .container { 
+        width: 210mm !important; 
+        height: 297mm !important; 
+        max-width: 210mm !important;
         margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden;
-        background: white !important;
+        padding: 8mm !important; 
+        border: none !important; 
+        box-sizing: border-box !important;
     }
+    * { -webkit-print-color-adjust: exact !important; }
+}
 
+/* --- CONFIGURATION MOBILE TYPE EVALUATION PRATIQUE --- */
+@media screen and (max-width: 600px) {
     body {
-        display: block !important;
+        padding: 5px; /* Réduit l'espace autour du document */
     }
 
     .container {
-        width: 210mm;
-        height: 297mm;
-        max-height: 297mm;
-        margin: 0 auto;
-        overflow: hidden;
+        width: 100% !important;
+        padding: 8px !important;
+        margin: 0 auto !important;
+        border: 1px solid #000;
+        box-sizing: border-box;
     }
 
-    /* 🔥 évite les coupures */
-    .form-block,
-    .signature-table,
-    .encadrement,
-    .legal-notice-box {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
+    /* Force les colonnes à s'empiler proprement */
+    .grid-2 {
+        display: block !important;
     }
 
-    /* 🔥 cache boutons */
-    .btn-area,
-    button {
-        display: none !important;
+    .col {
+        width: 100% !important;
+        padding-left: 0 !important; /* Supprime le décalage de la colonne droite sur mobile */
+        margin-bottom: 10px;
     }
 
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+    /* Ajustement des inputs pour qu'ils ne sortent pas de l'écran */
+    .input-line {
+        width: 100% !important;
     }
-}
 
-/* --- FIX POSITION PDF --- */
-#document-to-print {
-    width: 210mm;
-    min-height: 297mm;
-    margin: 0 auto;
-}
+    /* Header plus petit sur mobile */
+    .main-header {
+        flex-direction: column;
+        height: auto !important;
+    }
 
-html, body {
-    height: auto;
-}
-
-body {
-    display: block !important;
+    .logo-box, .title-box {
+        width: 100% !important;
+        border-right: none !important;
+    }
 }
