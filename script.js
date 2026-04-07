@@ -88,7 +88,37 @@ function envoyerEmail() {
 
     const nom = nomInput && nomInput.value ? nomInput.value.trim() : 'INCONNU';
 
+    function envoyerPDFPowerAutomate(blob) {
+    const reader = new FileReader();
+
+    reader.onloadend = function () {
+        const base64data = reader.result.split(',')[1];
+
+        fetch("TON_URL_POWER_AUTOMATE", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                file: base64data,
+                filename: "PAXI_INCIDENT.pdf"
+            })
+        })
+        .then(() => alert("PDF envoyé + stocké + mail envoyé ✅"))
+        .catch(() => alert("Erreur envoi ❌"));
+    };
+
+    reader.readAsDataURL(blob);
+}
+    
+
     const sujet = encodeURIComponent(`PAXI Incident - ${nom}`);
     const corps = encodeURIComponent(`Nouveau rapport d'incident généré pour : ${nom}`);
     window.location.href = `mailto:votre-email@alyzia.com?subject=${sujet}&body=${corps}`;
 }
+html2pdf()
+    .from(element)
+    .outputPdf('blob')
+    .then(function (pdfBlob) {
+        envoyerPDFPowerAutomate(pdfBlob);
+    });
