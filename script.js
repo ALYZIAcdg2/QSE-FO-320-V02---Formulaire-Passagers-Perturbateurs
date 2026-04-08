@@ -80,14 +80,6 @@ function genererPDF() {
         });
 }
 
-function envoyerEmail() {
-    const nomInput =
-        document.getElementById('nom_passager') ||
-        document.getElementById('nom-passager') ||
-        document.querySelector('input[name="nom_passager"]');
-
-    const nom = nomInput && nomInput.value ? nomInput.value.trim() : 'INCONNU';
-
 async function envoyerEmail() {
     const element = document.getElementById('document-to-print');
     const btnArea = document.querySelector('.btn-area');
