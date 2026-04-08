@@ -88,37 +88,86 @@ function envoyerEmail() {
 
     const nom = nomInput && nomInput.value ? nomInput.value.trim() : 'INCONNU';
 
-    function envoyerPDFPowerAutomate(blob) {
-    const reader = new FileReader();
+async function envoyerEmail() {
+    const element = document.getElementById('document-to-print');
+    const btnArea = document.querySelector('.btn-area');
+    const bouton = document.querySelector('.btn.envoyer');
 
-    reader.onloadend = function () {
-        const base64data = reader.result.split(',')[1];
+    const nomInput =
+        document.getElementById('nom_passager') ||
+        document.getElementById('nom-passager') ||
+        document.querySelector('input[name="nom_passager"]');
 
-        fetch("TON_URL_POWER_AUTOMATE", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+    const nom = nomInput && nomInput.value ? nomInput.value.trim() : 'INCONNU';
+
+    try {
+        bouton.disabled = true;
+        bouton.innerText = "ENVOI EN COURS...";
+
+        if (btnArea) btnArea.style.display = 'none';
+
+        // Figer les champs comme ton PDF
+        const fields = element.querySelectorAll('input, textarea');
+        fields.forEach((field) => {
+            const type = (field.type || '').toLowerCase();
+
+            if (type === 'checkbox' || type === 'radio') {
+                if (field.checked) {
+                    field.setAttribute('checked', 'checked');
+                } else {
+                    field.removeAttribute('checked');
+                }
+            } else {
+                field.setAttribute('value', field.value || '');
+            }
+        });
+
+        const editableZones = element.querySelectorAll('[contenteditable="true"]');
+        editableZones.forEach((zone) => {
+            zone.setAttribute('data-value', zone.innerText || '');
+        });
+
+        const opt = {
+            margin: [0, 0, 0, 0],
+            filename: `PAXI_INCIDENT_${nom}.pdf`,
+            image: { type: 'jpeg', quality: 0.95 },
+            html2canvas: {
+                scale: 1.5,
+                useCORS: true
             },
-            body: JSON.stringify({
-                file: base64data,
-                filename: "PAXI_INCIDENT.pdf"
-            })
-        })
-        .then(() => alert("PDF envoyé + stocké + mail envoyé ✅"))
-        .catch(() => alert("Erreur envoi ❌"));
-    };
+            jsPDF: {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait'
+            }
+        };
 
-    reader.readAsDataURL(blob);
-}
-    
+        // Génération PDF sans téléchargement
+        const pdfBlob = await html2pdf().set(opt).from(element).outputPdf('blob');
 
-    const sujet = encodeURIComponent(`PAXI Incident - ${nom}`);
-    const corps = encodeURIComponent(`Nouveau rapport d'incident généré pour : ${nom}`);
-    window.location.href = `mailto:votre-email@alyzia.com?subject=${sujet}&body=${corps}`;
+        // Conversion base64
+        const base64 = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(pdfBlob);
+            reader.onloadend = () => resolve(reader.result);
+        });
+
+        // 🔥 ENVOI EMAILJS
+        await emailjs.send("service_ddubyvm", "template_f5eltxm", {
+            to_email: "votre-email@alyzia.com",
+            subject: `PAXI Incident - ${nom}`,
+            message: `Nouveau rapport généré pour : ${nom}`,
+            attachment: base64
+        });
+
+        alert("Email envoyé avec succès ✅");
+
+    } catch (error) {
+        console.error(error);
+        alert("Erreur lors de l'envoi ❌");
+    } finally {
+        bouton.disabled = false;
+        bouton.innerText = "ENVOYER EMAIL";
+        if (btnArea) btnArea.style.display = 'block';
+    }
 }
-html2pdf()
-    .from(element)
-    .outputPdf('blob')
-    .then(function (pdfBlob) {
-        envoyerPDFPowerAutomate(pdfBlob);
-    });
