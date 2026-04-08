@@ -124,10 +124,10 @@ async function envoyerEmail() {
             filename: `PAXI_INCIDENT_${nom}.pdf`,
             image: { type: 'jpeg', quality: 0.95 },
 html2canvas: {
-    scale: 0.8,
+    scale: 0.6,
     useCORS: true
 },
-image: { type: 'jpeg', quality: 0.6 },
+image: { type: 'jpeg', quality: 0.5 },
             jsPDF: {
                 unit: 'mm',
                 format: 'a4',
