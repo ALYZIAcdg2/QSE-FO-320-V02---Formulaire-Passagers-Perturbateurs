@@ -162,27 +162,13 @@ async function envoyerEmail() {
     const btn = document.querySelector('.envoyer');
     const nomPassager = document.getElementById('nom_passager').value || "Inconnu";
     
-    // 1. On capture le contenu HTML exact du formulaire (le container A4)
-    // On y inclut le CSS pour que Google puisse l'interpréter
+    // Capture des styles et du contenu
     const styleCSS = Array.from(document.styleSheets[0].cssRules)
         .map(rule => rule.cssText).join(' ');
-    
     const content = document.getElementById('document-to-print').innerHTML;
     
-    const fullHtml = `
-        <html>
-        <head>
-            <style>
-                ${styleCSS}
-                body { background: white; margin: 0; padding: 0; }
-                .container { border: none !important; width: 100% !important; }
-                .no-print { display: none !important; }
-            </style>
-        </head>
-        <body>
-            <div class="container">${content}</div>
-        </body>
-        </html>`;
+    const fullHtml = `<html><head><style>${styleCSS} body{background:white;margin:0;padding:0;} .container{border:none!important;width:100%!important;} .no-print{display:none!important;}</style></head>
+    <body><div class="container">${content}</div></body></html>`;
 
     btn.innerHTML = "Envoi en cours...";
     btn.disabled = true;
@@ -190,18 +176,14 @@ async function envoyerEmail() {
     try {
         await fetch('https://script.google.com/macros/s/AKfycbxQ_9w4h1dz_U1c1USZ1Imp0Vc26qauIXvS3Ycg-NKjlkLmAzwwSSeI5kW3N_9YU-o/exec', {
             method: 'POST',
-            mode: 'no-cors', // Sécurité Google
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 htmlContent: fullHtml,
                 nomPassager: nomPassager
             })
         });
-        
-        alert("✅ Formulaire envoyé avec succès en pièce jointe PDF !");
+        alert("✅ Mail envoyé avec le PDF identique !");
     } catch (error) {
-        alert("Erreur d'envoi.");
-        console.error(error);
+        alert("Erreur lors de l'envoi.");
     } finally {
         btn.innerHTML = "ENVOYER EMAIL";
         btn.disabled = false;
