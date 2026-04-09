@@ -163,35 +163,30 @@ const form = document.getElementById('main-form');
 form.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // On change le texte du bouton pour faire patienter
-    const btn = form.querySelector('.envoyer');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = "Envoi en cours...";
-    btn.disabled = true;
-
+    // On récupère toutes les données du formulaire
     const formData = new FormData(form);
+
+    // ÉTAPE DE VÉRIFICATION : On affiche dans la console ce qui va être envoyé
+    console.log("Données envoyées :", Object.fromEntries(formData));
 
     fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formData // On envoie directement le FormData, c'est plus fiable
+        body: formData // Pas besoin de JSON.stringify ici, Web3Forms accepte le FormData direct
     })
     .then(async (response) => {
-        let json = await response.json();
-        if (response.status == 200) {
-            alert("Rapport envoyé avec succès !");
+        const result = await response.json();
+        if (response.status === 200) {
+            alert("✅ Rapport envoyé avec succès !");
             form.reset();
         } else {
-            console.log(json);
-            alert("Erreur : " + json.message);
+            // Cela affichera précisément ce qui manque (ex: "Access Key missing")
+            console.error("Erreur Web3Forms:", result);
+            alert("❌ Erreur : " + result.message);
         }
     })
     .catch(error => {
-        console.log(error);
-        alert("Une erreur réseau est survenue.");
-    })
-    .finally(() => {
-        btn.innerHTML = originalText;
-        btn.disabled = false;
+        console.error("Erreur réseau :", error);
+        alert("Impossible de joindre le serveur.");
     });
 });
 </script>
