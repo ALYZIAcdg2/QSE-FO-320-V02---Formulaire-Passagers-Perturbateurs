@@ -159,36 +159,51 @@
     <script src="script.js"></script>
 <script>
 async function envoyerEmail() {
-    const form = document.getElementById('main-form');
     const btn = document.querySelector('.envoyer');
+    const nomPassager = document.getElementById('nom_passager').value || "Inconnu";
     
-    // Changement visuel du bouton
+    // 1. On capture le contenu HTML exact du formulaire (le container A4)
+    // On y inclut le CSS pour que Google puisse l'interpréter
+    const styleCSS = Array.from(document.styleSheets[0].cssRules)
+        .map(rule => rule.cssText).join(' ');
+    
+    const content = document.getElementById('document-to-print').innerHTML;
+    
+    const fullHtml = `
+        <html>
+        <head>
+            <style>
+                ${styleCSS}
+                body { background: white; margin: 0; padding: 0; }
+                .container { border: none !important; width: 100% !important; }
+                .no-print { display: none !important; }
+            </style>
+        </head>
+        <body>
+            <div class="container">${content}</div>
+        </body>
+        </html>`;
+
     btn.innerHTML = "Envoi en cours...";
-    btn.style.opacity = "0.5";
     btn.disabled = true;
 
-    const formData = new URLSearchParams(new FormData(form));
-
     try {
-        // Envoi vers Google
         await fetch('https://script.google.com/macros/s/AKfycbxQ_9w4h1dz_U1c1USZ1Imp0Vc26qauIXvS3Ycg-NKjlkLmAzwwSSeI5kW3N_9YU-o/exec', {
             method: 'POST',
-            mode: 'no-cors', // Force le passage sans erreur de sécurité
-            cache: 'no-cache',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: formData.toString()
+            mode: 'no-cors', // Sécurité Google
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                htmlContent: fullHtml,
+                nomPassager: nomPassager
+            })
         });
         
-        // Avec 'no-cors', on ne peut pas lire la réponse, 
-        // donc on considère que c'est bon si pas d'erreur réseau
-        alert("✅ Formulaire envoyé ! Vérifiez votre boîte mail d'ici 1 minute.");
-        form.reset();
+        alert("✅ Formulaire envoyé avec succès en pièce jointe PDF !");
     } catch (error) {
-        alert("Erreur réseau. Vérifiez votre connexion.");
+        alert("Erreur d'envoi.");
         console.error(error);
     } finally {
         btn.innerHTML = "ENVOYER EMAIL";
-        btn.style.opacity = "1";
         btn.disabled = false;
     }
 }
