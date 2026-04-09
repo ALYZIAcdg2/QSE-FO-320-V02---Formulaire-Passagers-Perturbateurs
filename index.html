@@ -157,38 +157,5 @@
         </div>
     </form>
     <script src="script.js"></script>
-<script>
-const form = document.getElementById('main-form');
-
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // On récupère toutes les données du formulaire
-    const formData = new FormData(form);
-
-    // ÉTAPE DE VÉRIFICATION : On affiche dans la console ce qui va être envoyé
-    console.log("Données envoyées :", Object.fromEntries(formData));
-
-    fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData // Pas besoin de JSON.stringify ici, Web3Forms accepte le FormData direct
-    })
-    .then(async (response) => {
-        const result = await response.json();
-        if (response.status === 200) {
-            alert("✅ Rapport envoyé avec succès !");
-            form.reset();
-        } else {
-            // Cela affichera précisément ce qui manque (ex: "Access Key missing")
-            console.error("Erreur Web3Forms:", result);
-            alert("❌ Erreur : " + result.message);
-        }
-    })
-    .catch(error => {
-        console.error("Erreur réseau :", error);
-        alert("Impossible de joindre le serveur.");
-    });
-});
-</script>
 </body>
 </html>
