@@ -157,27 +157,39 @@
         </div>
     </form>
     <script src="script.js"></script>
-    <script>
+<script>
 async function envoyerEmail() {
     const form = document.getElementById('main-form');
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    // On change le bouton
     const btn = document.querySelector('.envoyer');
+    
+    // Changement visuel du bouton
     btn.innerHTML = "Envoi en cours...";
+    btn.style.opacity = "0.5";
+    btn.disabled = true;
+
+    const formData = new URLSearchParams(new FormData(form));
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxQ_9w4h1dz_U1c1USZ1Imp0Vc26qauIXvS3Ycg-NKjlkLmAzwwSSeI5kW3N_9YU-o/exec', {
+        // Envoi vers Google
+        await fetch('https://script.google.com/macros/s/AKfycbxQ_9w4h1dz_U1c1USZ1Imp0Vc26qauIXvS3Ycg-NKjlkLmAzwwSSeI5kW3N_9YU-o/exec', {
             method: 'POST',
-            body: JSON.stringify(data)
+            mode: 'no-cors', // Force le passage sans erreur de sécurité
+            cache: 'no-cache',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: formData.toString()
         });
         
-        alert("✅ Formulaire envoyé avec succès !");
-        btn.innerHTML = "ENVOYER EMAIL";
+        // Avec 'no-cors', on ne peut pas lire la réponse, 
+        // donc on considère que c'est bon si pas d'erreur réseau
+        alert("✅ Formulaire envoyé ! Vérifiez votre boîte mail d'ici 1 minute.");
+        form.reset();
     } catch (error) {
-        alert("Erreur d'envoi. Mais le script Google a peut-être reçu les infos !");
+        alert("Erreur réseau. Vérifiez votre connexion.");
         console.error(error);
+    } finally {
+        btn.innerHTML = "ENVOYER EMAIL";
+        btn.style.opacity = "1";
+        btn.disabled = false;
     }
 }
 </script>
