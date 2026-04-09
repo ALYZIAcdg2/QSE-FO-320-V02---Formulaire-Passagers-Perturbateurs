@@ -165,28 +165,26 @@ async function envoyerEmail() {
     const btn = document.querySelector('.envoyer');
     const nomPassager = document.getElementById('nom_passager').value || "Inconnu";
 
-    // --- ÉTAPE CRUCIALE : FIXER LES VALEURS DANS LE HTML ---
-    // On duplique le contenu pour ne pas modifier la page en direct
     const container = document.getElementById('document-to-print');
     
-    // Pour chaque input texte, on remplace la valeur par défaut par ce qui est écrit
+    // On fixe les valeurs des champs pour le PDF
     container.querySelectorAll('input[type="text"], input[type="date"], input[type="time"], textarea').forEach(input => {
         input.setAttribute('value', input.value);
-        if(input.tagName === 'TEXTAREA') {
-            input.innerHTML = input.value;
-        }
+        if(input.tagName === 'TEXTAREA') input.innerHTML = input.value;
     });
 
-    // Pour chaque checkbox et radio, on fixe l'état coché
     container.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
-        if (input.checked) {
-            input.setAttribute('checked', 'checked');
-        } else {
-            input.removeAttribute('checked');
-        }
+        if (input.checked) input.setAttribute('checked', 'checked');
+        else input.removeAttribute('checked');
     });
 
-    // Maintenant on capture le style et le contenu mis à jour
+    // --- CORRECTION DU LOGO ICI ---
+    // On remplace le lien local par l'URL absolue de votre GitHub
+    const logoImg = container.querySelector('.logo-box img');
+    if (logoImg) {
+        logoImg.src = "https://alyziacdg2.github.io/QSE-FO-320-V02---Formulaire-Passagers-Perturbateurs/logo_alyzia.png";
+    }
+
     const styleCSS = Array.from(document.styleSheets[0].cssRules)
         .map(rule => rule.cssText).join(' ');
     
@@ -200,7 +198,8 @@ async function envoyerEmail() {
                 body { background: white; margin: 0; padding: 0; }
                 .container { border: none !important; width: 100% !important; }
                 .no-print { display: none !important; }
-                input { border: none !important; background: transparent !important; }
+                /* On s'assure que le logo a une taille correcte dans le PDF */
+                .logo-box img { width: 120px !important; height: auto !important; }
             </style>
         </head>
         <body>
@@ -215,17 +214,14 @@ async function envoyerEmail() {
         await fetch('https://script.google.com/macros/s/AKfycbxQ_9w4h1dz_U1c1USZ1Imp0Vc26qauIXvS3Ycg-NKjlkLmAzwwSSeI5kW3N_9YU-o/exec', {
             method: 'POST',
             mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 htmlContent: fullHtml,
                 nomPassager: nomPassager
             })
         });
-        
-        alert("✅ Formulaire envoyé PAXI envoyé!");
+        alert("✅ Formulaire envoyé avec le logo et vos données !");
     } catch (error) {
         alert("Erreur d'envoi.");
-        console.error(error);
     } finally {
         btn.innerHTML = "ENVOYER EMAIL";
         btn.disabled = false;
