@@ -168,7 +168,7 @@ async function envoyerEmail() {
     btn.innerHTML = "Envoi en cours...";
 
     try {
-        const response = await fetch('URL_DE_TON_SCRIPT_GOOGLE_ICI', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxQ_9w4h1dz_U1c1USZ1Imp0Vc26qauIXvS3Ycg-NKjlkLmAzwwSSeI5kW3N_9YU-o/exec', {
             method: 'POST',
             body: JSON.stringify(data)
         });
