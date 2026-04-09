@@ -161,14 +161,49 @@
 async function envoyerEmail() {
     const btn = document.querySelector('.envoyer');
     const nomPassager = document.getElementById('nom_passager').value || "Inconnu";
+
+    // --- ÉTAPE CRUCIALE : FIXER LES VALEURS DANS LE HTML ---
+    // On duplique le contenu pour ne pas modifier la page en direct
+    const container = document.getElementById('document-to-print');
     
-    // Capture des styles et du contenu
+    // Pour chaque input texte, on remplace la valeur par défaut par ce qui est écrit
+    container.querySelectorAll('input[type="text"], input[type="date"], input[type="time"], textarea').forEach(input => {
+        input.setAttribute('value', input.value);
+        if(input.tagName === 'TEXTAREA') {
+            input.innerHTML = input.value;
+        }
+    });
+
+    // Pour chaque checkbox et radio, on fixe l'état coché
+    container.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+        if (input.checked) {
+            input.setAttribute('checked', 'checked');
+        } else {
+            input.removeAttribute('checked');
+        }
+    });
+
+    // Maintenant on capture le style et le contenu mis à jour
     const styleCSS = Array.from(document.styleSheets[0].cssRules)
         .map(rule => rule.cssText).join(' ');
-    const content = document.getElementById('document-to-print').innerHTML;
     
-    const fullHtml = `<html><head><style>${styleCSS} body{background:white;margin:0;padding:0;} .container{border:none!important;width:100%!important;} .no-print{display:none!important;}</style></head>
-    <body><div class="container">${content}</div></body></html>`;
+    const content = container.innerHTML;
+    
+    const fullHtml = `
+        <html>
+        <head>
+            <style>
+                ${styleCSS}
+                body { background: white; margin: 0; padding: 0; }
+                .container { border: none !important; width: 100% !important; }
+                .no-print { display: none !important; }
+                input { border: none !important; background: transparent !important; }
+            </style>
+        </head>
+        <body>
+            <div class="container">${content}</div>
+        </body>
+        </html>`;
 
     btn.innerHTML = "Envoi en cours...";
     btn.disabled = true;
@@ -176,14 +211,18 @@ async function envoyerEmail() {
     try {
         await fetch('https://script.google.com/macros/s/AKfycbxQ_9w4h1dz_U1c1USZ1Imp0Vc26qauIXvS3Ycg-NKjlkLmAzwwSSeI5kW3N_9YU-o/exec', {
             method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 htmlContent: fullHtml,
                 nomPassager: nomPassager
             })
         });
-        alert("✅ Mail envoyé avec le PDF identique !");
+        
+        alert("✅ Formulaire envoyé avec toutes vos saisies !");
     } catch (error) {
-        alert("Erreur lors de l'envoi.");
+        alert("Erreur d'envoi.");
+        console.error(error);
     } finally {
         btn.innerHTML = "ENVOYER EMAIL";
         btn.disabled = false;
