@@ -153,9 +153,33 @@
 
         <div class="btn-area no-print">
             <button type="button" onclick="genererPDF()" class="btn pdf">ENREGISTRER PDF</button>
-            <button type="submit" class="btn envoyer">ENVOYER EMAIL</button>
+            <button type="button" onclick="envoyerEmail()" class="btn envoyer">ENVOYER EMAIL</button>
         </div>
     </form>
     <script src="script.js"></script>
+    <script>
+async function envoyerEmail() {
+    const form = document.getElementById('main-form');
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // On change le bouton
+    const btn = document.querySelector('.envoyer');
+    btn.innerHTML = "Envoi en cours...";
+
+    try {
+        const response = await fetch('URL_DE_TON_SCRIPT_GOOGLE_ICI', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+        
+        alert("✅ Formulaire envoyé avec succès !");
+        btn.innerHTML = "ENVOYER EMAIL";
+    } catch (error) {
+        alert("Erreur d'envoi. Mais le script Google a peut-être reçu les infos !");
+        console.error(error);
+    }
+}
+</script>
 </body>
 </html>
